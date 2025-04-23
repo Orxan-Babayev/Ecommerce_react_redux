@@ -1,0 +1,141 @@
+@mixin title {
+    font-size: 14px;
+    margin-bottom: 20px;
+    cursor: default;
+    font-weight: 500;
+
+
+}
+
+.footer{
+
+    background-color: #f5f5f5;
+.fmain {
+    display: flex;
+    justify-content: center;
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+    padding-top: 60px;
+    margin-bottom: 50px;
+
+    .contact {
+        width: 30%;
+
+        .logo {
+            max-width: 130px;
+            margin-bottom: 25px;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        .text {
+            width: 75%;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+        .title {
+            @include title;
+        }
+
+        .h4 {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .icon {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 15px;
+            font-size: 14px;
+
+        }
+
+        .email {
+            width: 80%;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        .form {
+
+            max-width: 400px;
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 25px;
+
+            .input {
+                padding: 10px 18px;
+                background-color: #fff;
+                color: #000;
+                border-radius: 6px 0 0 6px;
+                border: none;
+                font-size: 13px;
+                line-height: 20px;
+                width: 63%;
+                outline: none;
+            }
+
+            .submit {
+                border-radius: 0 6px 6px 0;
+                font-size: 12px;
+                font-weight: 500;
+                padding: 12px 25px;
+                line-height: 1;
+                text-transform: uppercase;
+                overflow: visible;
+                border: 0 !important;
+                color: #fff;
+                background-color: #333;
+            }
+        }
+    }
+
+
+}
+
+.info {
+    width: 20%;
+
+    .title {
+        @include title;
+    }
+
+    ul li {
+        font-size: 13px;
+        margin-bottom: 7px;
+    }
+
+
+}
+
+
+.fbottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+
+    .fleft{
+        margin-bottom: 10px;
+        font-size: 13px;
+    }
+
+    .fright{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+
+        svg{
+            width: 35px;
+        }
+    }
+}
+}

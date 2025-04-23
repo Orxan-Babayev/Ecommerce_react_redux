@@ -1,0 +1,1306 @@
+{
+  "colors": [
+    {
+      "id": 1,
+      "color": "green"
+    },
+    {
+      "id": 2,
+      "color": "red"
+    },
+    {
+      "id": 3,
+      "color": "blue"
+    },
+    {
+      "id": 4,
+      "color": "black"
+    },
+    {
+      "id": 5,
+      "color": "brown"
+    },
+    {
+      "id": 6,
+      "color": "orange"
+    },
+    {
+      "id": 7,
+      "color": "white"
+    },
+    {
+      "id": 8,
+      "color": "yellow"
+    },
+    {
+      "id": 9,
+      "color": "pink"
+    },
+    {
+      "id": 10,
+      "color": "gray"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Women",
+      "sub_categories": [
+        {
+          "id": 1,
+          "name": "Coats"
+        },
+        {
+          "id": 2,
+          "name": "Dresses"
+        },
+        {
+          "id": 3,
+          "name": "Sweatshirts"
+        },
+        {
+          "id": 4,
+          "name": "Shirts"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Men",
+      "sub_categories": [
+        {
+          "id": 1,
+          "name": "Jeans"
+        },
+        {
+          "id": 2,
+          "name": "Sportswear"
+        },
+        {
+          "id": 3,
+          "name": "Suits"
+        },
+        {
+          "id": 4,
+          "name": "Polo shirts"
+        },
+        {
+          "id": 5,
+          "name": "T-Shirts"
+        },
+        {
+          "id": 6,
+          "name": "Pullovers"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Accessories",
+      "sub_categories": [
+        {
+          "id": 1,
+          "name": "Belts"
+        },
+        {
+          "id": 2,
+          "name": "Cosmetics"
+        },
+        {
+          "id": 3,
+          "name": "Glasses"
+        },
+        {
+          "id": 4,
+          "name": "Jewelry"
+        },
+        {
+          "id": 5,
+          "name": "Handbags"
+        },
+        {
+          "id": 6,
+          "name": "Watches"
+        },
+        {
+          "id": 7,
+          "name": "Perfumes"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Shoes",
+      "sub_categories": [
+        {
+          "id": 1,
+          "name": "Heels"
+        },
+        {
+          "id": 2,
+          "name": "Sandals"
+        },
+        {
+          "id": 3,
+          "name": "Sneakers"
+        },
+        {
+          "id": 4,
+          "name": "Slippers"
+        }
+      ]
+    }
+  ],
+  "top-categories": [
+    {
+      "id": 1,
+      "name": "Handbags",
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/cat-handbags.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Glasses",
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/cat-glasses.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Jewelry",
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/cat-jewelry.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Cosmetics",
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/12/cat-cosmetics.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Watches",
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/cat-watches.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Perfumes",
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/cat-perfumes.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Shoes",
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/cat-shoes.jpg"
+    }
+  ],
+  "brands": [
+    {
+      "id": 1,
+      "brand": "Burberry"
+    },
+    {
+      "id": 2,
+      "brand": "C&A"
+    },
+    {
+      "id": 3,
+      "brand": "Cartier"
+    },
+    {
+      "id": 4,
+      "brand": "Chanel"
+    },
+    {
+      "id": 5,
+      "brand": "Chopard"
+    },
+    {
+      "id": 6,
+      "brand": "Chow Tai Fook"
+    },
+    {
+      "id": 7,
+      "brand": "Christian Louboutin"
+    },
+    {
+      "id": 8,
+      "brand": "Ecco"
+    },
+    {
+      "id": 9,
+      "brand": "Supersport"
+    },
+    {
+      "id": 10,
+      "brand": "Topshop"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "title": "LV print mini dress",
+      "price": "90.00",
+      "category": {
+        "id": 1,
+        "name": "Women",
+        "sub_category": "Dresses"
+      },
+      "brand": "Christian Louboutin",
+      "product_code": "0051",
+      "description": "With the new fashion trends and all the available shopping options you can order your clothes online and make money without even leaving your house.",
+      "InStock": {
+        "stockAvailabilty": true,
+        "stockCount": 5
+      },
+      "newArrived": true,
+      "recommended": true,
+      "bestsellers": true,
+      "color": "white",
+      "StockCount": 20,
+      "onSale": {
+        "saleAvailabilty": true,
+        "saleCount": 40
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/2-600x799.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/2-600x799.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Topshop coat in red",
+      "price": "79.00",
+      "category": {
+        "id": 1,
+        "name": "Women",
+        "sub_category": "Coats"
+      },
+      "brand": "Topshop",
+      "product_code": "0003",
+      "description": "With the new fashion trends and all the available shopping options you can order your clothes online and make money without even leaving your house.",
+      "InStock": {
+        "stockAvailabilty": true,
+        "stockCount": 28
+      },
+      "sizes": [
+        {
+          "id": 1,
+          "name": "XS"
+        },
+        {
+          "id": 2,
+          "name": "S"
+        },
+        {
+          "id": 3,
+          "name": "M"
+        },
+        {
+          "id": 4,
+          "name": "L"
+        },
+        {
+          "id": 5,
+          "name": "XL"
+        }
+      ],
+      "newArrived": false,
+      "recommended": true,
+      "bestsellers": true,
+      "color": "red",
+      "StockCount": 20,
+      "onSale": {
+        "saleAvailabilty": true,
+        "saleCount": 28
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/07/20-600x799.jpg"
+        },
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/07/21.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/07/20-600x799.jpg"
+    },
+    {
+      "id": 3,
+      "title": "CK polo with tipping",
+      "price": "70.00",
+      "category": {
+        "id": 1,
+        "name": "Men",
+        "sub_category": "Polo shirts"
+      },
+      "brand": "Chanel",
+      "product_code": "0010",
+      "description": "With the new fashion trends and all the available shopping options you can order your clothes online and make money without even leaving your house.",
+      "InStock": {
+        "stockAvailabilty": true,
+        "stockCount": 10
+      },
+      "sizes": [
+        {
+          "id": 1,
+          "name": "M"
+        },
+        {
+          "id": 2,
+          "name": "L"
+        },
+        {
+          "id": 3,
+          "name": "XL"
+        },
+        {
+          "id": 4,
+          "name": "XXl"
+        }
+      ],
+      "newArrived": false,
+      "recommended": false,
+      "bestsellers": false,
+      "color": "green",
+      "onSale": {
+        "saleAvailabilty": true,
+        "saleCount": 16
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/25-600x799.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/25-600x799.jpg"
+    },
+    {
+      "id": 4,
+      "title": "Zara t-shirt long sleeve",
+      "price": "30.00",
+      "category": {
+        "id": 1,
+        "name": "Men",
+        "sub_category": "T-Shirts"
+      },
+      "brand": "Chopard",
+      "product_code": "0042",
+      "description": "With the new fashion trends and all the available shopping options you can order your clothes online and make money without even leaving your house.",
+      "InStock": {
+        "stockAvailabilty": false,
+        "stockCount": 0
+      },
+      "sizes": [
+        {
+          "id": 1,
+          "name": "M"
+        },
+        {
+          "id": 2,
+          "name": "L"
+        },
+        {
+          "id": 3,
+          "name": "XL"
+        },
+        {
+          "id": 4,
+          "name": "XXL"
+        }
+      ],
+      "newArrived": false,
+      "recommended": false,
+      "bestsellers": false,
+      "color": "blue",
+      "StockCount": 20,
+      "onSale": {
+        "saleAvailabilty": false
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/52-600x799.jpg"
+        },
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/74.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/52-600x799.jpg"
+    },
+    {
+      "id": 5,
+      "title": "Frame round sunglasses",
+      "price": "30.00",
+      "category": {
+        "id": 1,
+        "name": "Accessories",
+        "sub_category": "Glasses"
+      },
+      "brand": "Chanel",
+      "product_code": "0043",
+      "description": "With the new fashion trends and all the available shopping options you can order your clothes online and make money without even leaving your house.",
+      "InStock": {
+        "stockAvailabilty": true,
+        "stockCount": 3
+      },
+      "sizes": [
+        {
+          "id": 1,
+          "name": "M"
+        }
+      ],
+      "newArrived": false,
+      "recommended": false,
+      "bestsellers": false,
+      "color": "brown",
+      "StockCount": 20,
+      "onSale": {
+        "saleAvailabilty": true,
+        "saleCount": 40
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/100-600x799.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/100-600x799.jpg"
+    },
+    {
+      "id": 6,
+      "title": "Face makeup brush",
+      "price": "10.00",
+      "category": {
+        "id": 1,
+        "name": "Accessories",
+        "sub_category": "Cosmetics"
+      },
+      "brand": "Christian Louboutin",
+      "product_code": "0074",
+      "description": "With the new fashion trends and all the available shopping options you can order your clothes online and make money without even leaving your house.",
+      "InStock": {
+        "stockAvailabilty": false,
+        "stockCount": 0
+      },
+      "newArrived": false,
+      "recommended": false,
+      "bestsellers": false,
+      "color": "pink",
+      "StockCount": 20,
+      "onSale": {
+        "saleAvailabilty": false
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/139-600x799.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/139-600x799.jpg"
+    },
+    {
+      "id": 7,
+      "title": "Suede platform heels",
+      "price": "69.00",
+      "category": {
+        "id": 1,
+        "name": "Shoes",
+        "sub_category": "Heels"
+      },
+      "brand": "C&A",
+      "description": "With the new fashion trends and all the available shopping options you can order your clothes online and make money without even leaving your house.",
+      "InStock": {
+        "stockAvailabilty": true,
+        "stockCount": 10
+      },
+      "newArrived": true,
+      "recommended": false,
+      "bestsellers": true,
+      "color": "pink",
+      "onSale": {
+        "saleAvailabilty": true,
+        "saleCount": 14
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/172-600x799.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/172-600x799.jpg"
+    },
+    {
+      "id": 8,
+      "title": "Comfort slip on shoes",
+      "price": "30.00",
+      "category": {
+        "id": 1,
+        "name": "Shoes",
+        "sub_category": "Sneakers"
+      },
+      "brand": "Cartier",
+      "description": "With the new fashion trends and all the available shopping options you can order your clothes online and make money without even leaving your house.",
+      "InStock": {
+        "stockAvailabilty": false,
+        "stockCount": 0
+      },
+      "sizes": [
+        {
+          "id": 1,
+          "name": "XS"
+        },
+        {
+          "id": 2,
+          "name": "M"
+        }
+      ],
+      "newArrived": true,
+      "recommended": true,
+      "bestsellers": true,
+      "color": "white",
+      "StockCount": 20,
+      "onSale": {
+        "saleAvailabilty": false
+      },
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/176-600x799.jpg"
+    },
+    {
+      "id": 9,
+      "title": "Chunky sneakers",
+      "price": "70.00",
+      "category": {
+        "id": 1,
+        "name": "Shoes",
+        "sub_category": "Sneakers"
+      },
+      "brand": "Topshop",
+      "description": "With the new fashion trends and all the available shopping options you can order your clothes online and make money without even leaving your house.",
+      "InStock": {
+        "stockAvailabilty": true,
+        "stockCount": 4
+      },
+      "sizes": [
+        {
+          "id": 1,
+          "name": "XS"
+        },
+        {
+          "id": 2,
+          "name": "S"
+        }
+      ],
+      "newArrived": true,
+      "recommended": true,
+      "bestsellers": true,
+      "color": "black",
+      "StockCount": 20,
+      "onSale": {
+        "saleAvailabilty": true,
+        "saleCount": 40
+      },
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/66.jpg"
+    },
+    {
+      "id": 10,
+      "title": "Asso slim suit in black",
+      "price": "150.00",
+      "category": {
+        "id": 1,
+        "name": "Men",
+        "sub_category": "Suits"
+      },
+      "brand": "Burberry",
+      "description": "With the new fashion trends and all the available shopping options you can order your clothes online and make money without even leaving your house.",
+      "InStock": {
+        "stockAvailabilty": false,
+        "stockCount": 0
+      },
+      "sizes": [
+        {
+          "id": 1,
+          "name": "M"
+        }
+      ],
+      "newArrived": true,
+      "recommended": true,
+      "bestsellers": true,
+      "color": "black",
+      "StockCount": 20,
+      "onSale": {
+        "saleAvailabilty": false
+      },
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/79-600x799.jpg"
+    },
+    {
+      "id": 11,
+      "title": "Striped cardigan black",
+      "price": "400.00",
+      "category": {
+        "id": 1,
+        "name": "Women",
+        "sub_category": "Sweatshirts"
+      },
+      "brand": "Chopard",
+      "description": "With the new fashion trends and all the available shopping options you can order your clothes online and make money without even leaving your house.",
+      "InStock": {
+        "stockAvailabilty": true,
+        "stockCount": 4
+      },
+      "sizes": [
+        {
+          "id": 1,
+          "name": "XXl"
+        }
+      ],
+      "newArrived": true,
+      "recommended": true,
+      "bestsellers": true,
+      "color": "white",
+      "StockCount": 20,
+      "onSale": {
+        "saleAvailabilty": true,
+        "saleCount": 40
+      },
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/95-600x799.jpg"
+    },
+    {
+      "id": 12,
+      "title": "Men’s 35mm classic belt",
+      "price": "46.00",
+      "category": {
+        "id": 1,
+        "name": "Accessories",
+        "sub_category": "Belts"
+      },
+      "brand": "Ecco",
+      "product_code": "0143",
+      "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
+      "InStock": {
+        "stockAvailabilty": true,
+        "stockCount": 4
+      },
+      "newArrived": false,
+      "recommended": false,
+      "bestsellers": false,
+      "color": "black",
+      "StockCount": 20,
+      "onSale": {
+        "saleAvailabilty": false
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2023/06/214.jpg"
+        },
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2023/06/217.jpg"
+        },
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2023/06/221.jpg"
+        },
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2023/08/233.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2023/06/214.jpg"
+    },
+    {
+      "id": 13,
+      "title": "Topshop midaxi dress",
+      "price": "180.00",
+      "category": {
+        "id": 1,
+        "name": "Women",
+        "sub_category": "Dresses"
+      },
+      "brand": "Chow Tai Fook",
+      "product_code": "0073",
+      "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
+      "InStock": {
+        "stockAvailabilty": true,
+        "stockCount": 4
+      },
+      "newArrived": true,
+      "recommended": false,
+      "bestsellers": false,
+      "color": "black",
+      "StockCount": 20,
+      "onSale": {
+        "saleAvailabilty": true,
+        "saleCount": 45
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/08/8.jpg"
+        },
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/08/6.jpg"
+        },
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/08/7.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/08/8.jpg"
+    },
+    {
+      "id": 14,
+      "title": "Bow gold claw clips",
+      "price": "50.00",
+      "category": {
+        "id": 1,
+        "name": "Accessories",
+        "sub_category": "Jewelry"
+      },
+      "brand": "Topshop",
+      "product_code": "0133",
+      "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
+      "InStock": {
+        "stockAvailabilty": true,
+        "stockCount": 4
+      },
+      "newArrived": false,
+      "recommended": false,
+      "bestsellers": true,
+      "color": "yellow",
+      "StockCount": 20,
+      "onSale": {
+        "saleAvailabilty": false
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/08/185.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/08/185.jpg"
+    },
+    {
+      "id": 15,
+      "title": "Shirt whitsome corduroy",
+      "price": "45.00",
+      "category": {
+        "id": 1,
+        "name": "Men",
+        "sub_category": "Pullovers"
+      },
+      "brand": "Topshop",
+      "product_code": "0085",
+      "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
+      "InStock": {
+        "stockAvailabilty": false
+      },
+      "newArrived": false,
+      "recommended": false,
+      "bestsellers": false,
+      "color": "white",
+      "StockCount": 20,
+      "onSale": {
+        "saleAvailabilty": false
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/08/13.jpg"
+        },
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/08/14-600x799.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/08/13.jpg"
+    },
+    {
+      "id": 16,
+      "title": "Oversized jacket",
+      "price": "90.00",
+      "category": {
+        "id": 1,
+        "name": "Women",
+        "sub_category": "Coats"
+      },
+      "brand": "Chanel",
+      "product_code": "0083",
+      "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
+      "InStock": {
+        "stockAvailabilty": false
+      },
+      "newArrived": false,
+      "recommended": false,
+      "bestsellers": false,
+      "color": "pink",
+      "StockCount": 20,
+      "onSale": {
+        "saleAvailabilty": false
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/4.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/4.jpg"
+    },
+    {
+      "id": 17,
+      "title": "Sweatshirt in two colors",
+      "price": "50.00",
+      "category": {
+        "id": 1,
+        "name": "Women",
+        "sub_category": "Sweatshirts"
+      },
+      "brand": "C&A",
+      "product_code": "0026",
+      "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
+      "InStock": {
+        "stockAvailabilty": true,
+        "stockCount": 50
+      },
+      "newArrived": false,
+      "recommended": false,
+      "bestsellers": false,
+      "color": "pink",
+      "StockCount": 20,
+      "onSale": {
+        "saleAvailabilty": true,
+        "saleCount": 50
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/16.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/16.jpg"
+    },
+    {
+      "id": 18,
+      "title": "Maxi dress in floral",
+      "price": "140.00",
+      "category": {
+        "id": 1,
+        "name": "Women",
+        "sub_category": "Dresses"
+      },
+      "brand": "Christian Louboutin",
+      "product_code": "0082",
+      "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
+      "InStock": {
+        "stockAvailabilty": true,
+        "stockCount": 50
+      },
+      "sizes": [
+        {
+          "id": 1,
+          "name": "XS"
+        },
+        {
+          "id": 2,
+          "name": "S"
+        },
+        {
+          "id": 3,
+          "name": "M"
+        },
+        {
+          "id": 4,
+          "name": "L"
+        },
+        {
+          "id": 5,
+          "name": "XL"
+        }
+      ],
+      "newArrived": false,
+      "recommended": false,
+      "bestsellers": false,
+      "color": "pink",
+      "StockCount": 20,
+      "onSale": {
+        "saleAvailabilty": true,
+        "saleCount": 29
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/85.jpg"
+        },
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/84.jpg"
+        },
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/86.jpg"
+        },
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/10/122.jpg"
+        },
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/10/123.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/85.jpg"
+    },
+    {
+      "id": 19,
+      "title": "Beautifying face palette",
+      "price": "24.00",
+      "category": {
+        "id": 1,
+        "name": "Accessories",
+        "sub_category": "Cosmetics"
+      },
+      "brand": "Ecco",
+      "product_code": "0079",
+      "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
+      "InStock": {
+        "stockAvailabilty": true,
+        "stockCount": 50
+      },
+      "newArrived": false,
+      "recommended": true,
+      "bestsellers": true,
+      "color": "pink",
+      "StockCount": 20,
+      "onSale": {
+        "saleAvailabilty": false
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/146.jpg"
+        },
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/147-600x799.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/146.jpg"
+    },
+    {
+      "id": 20,
+      "title": "Curve 2 in 1 jumpsuit",
+      "price": "39.00",
+      "category": {
+        "id": 1,
+        "name": "Women",
+        "sub_category": "Shirts"
+      },
+      "brand": "Ecco",
+      "product_code": "0018",
+      "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
+      "InStock": {
+        "stockAvailabilty": false
+      },
+      "newArrived": false,
+      "recommended": false,
+      "bestsellers": false,
+      "color": "green",
+      "onSale": {
+        "saleAvailabilty": false
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/02/65.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/02/65.jpg"
+    },
+    {
+      "id": 21,
+      "title": "Vans trainers in white",
+      "price": "60.00",
+      "category": {
+        "id": 1,
+        "name": "Shoes",
+        "sub_category": "Sneakers"
+      },
+      "brand": "Ecco",
+      "product_code": "0091",
+      "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
+      "InStock": {
+        "stockAvailabilty": true,
+        "stockCount": 40
+      },
+      "newArrived": false,
+      "recommended": false,
+      "bestsellers": false,
+      "color": "white",
+      "onSale": {
+        "saleAvailabilty": false
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/3.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/3.jpg"
+    },
+    {
+      "id": 22,
+      "title": "Asso preppy sunglasses",
+      "price": "40.00",
+      "category": {
+        "id": 1,
+        "name": "Accessories",
+        "sub_category": "Glasses"
+      },
+      "brand": "Cartier",
+      "product_code": "0038",
+      "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
+      "InStock": {
+        "stockAvailabilty": true,
+        "stockCount": 40
+      },
+      "newArrived": true,
+      "recommended": false,
+      "bestsellers": true,
+      "color": "black",
+      "onSale": {
+        "saleAvailabilty": false
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/87.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/87.jpg"
+    },
+    {
+      "id": 23,
+      "title": "Foil spot mini dress",
+      "price": "80.00",
+      "category": {
+        "id": 1,
+        "name": "Women",
+        "sub_category": "Dresses"
+      },
+      "brand": "Burberry",
+      "product_code": "0028",
+      "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
+      "InStock": {
+        "stockAvailabilty": true,
+        "stockCount": 40
+      },
+      "newArrived": true,
+      "recommended": true,
+      "bestsellers": false,
+      "color": "black",
+      "onSale": {
+        "saleAvailabilty": false
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/47.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/47.jpg"
+    },
+    {
+      "id": 24,
+      "title": "Cotton shoulder dress",
+      "price": "40.00",
+      "category": {
+        "id": 1,
+        "name": "Women",
+        "sub_category": "Dresses"
+      },
+      "brand": "Chow Tai Fook",
+      "product_code": "0006",
+      "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
+      "InStock": {
+        "stockAvailabilty": true,
+        "stockCount": 40
+      },
+      "newArrived": true,
+      "recommended": false,
+      "bestsellers": false,
+      "color": "white",
+      "onSale": {
+        "saleAvailabilty": false
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/07/10.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/07/10.jpg"
+    },
+    {
+      "id": 25,
+      "title": "ALDO top handle bag",
+      "price": "70.00",
+      "category": {
+        "id": 1,
+        "name": "Accessories",
+        "sub_category": "Handbags"
+      },
+      "brand": "Cartier",
+      "product_code": "0018",
+      "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
+      "InStock": {
+        "stockAvailabilty": true,
+        "stockCount": 40
+      },
+      "newArrived": true,
+      "recommended": false,
+      "bestsellers": true,
+      "color": "white",
+      "onSale": {
+        "saleAvailabilty": true,
+        "saleCount": 10
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/150.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/150.jpg"
+    },
+    {
+      "id": 26,
+      "title": "Bracelet watch",
+      "price": "90.00",
+      "category": {
+        "id": 1,
+        "name": "Accessories",
+        "sub_category": "Watches"
+      },
+      "brand": "Christian Louboutin",
+      "product_code": "0105",
+      "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
+      "InStock": {
+        "stockAvailabilty": false,
+        "stockCount": 0
+      },
+      "newArrived": false,
+      "recommended": true,
+      "bestsellers": true,
+      "color": "gray",
+      "onSale": {
+        "saleAvailabilty": false
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/179.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/179.jpg"
+    },
+    {
+      "id": 27,
+      "title": "Womens oversized sweater",
+      "price": "60.00",
+      "category": {
+        "id": 1,
+        "name": "Women",
+        "sub_category": "Sweatshirts"
+      },
+      "brand": "Chanel",
+      "product_code": "0063",
+      "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
+      "InStock": {
+        "stockAvailabilty": true,
+        "stockCount": 20
+      },
+      "newArrived": true,
+      "recommended": true,
+      "bestsellers": false,
+      "color": "red",
+      "onSale": {
+        "saleAvailabilty": true,
+        "saleCount": 20
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/08/9.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/08/9.jpg"
+    },
+    {
+      "id": 28,
+      "title": "Chloe perfum spray 1.7 Oz",
+      "price": "120.00",
+      "category": {
+        "id": 1,
+        "name": "Accessories",
+        "sub_category": "Perfumes"
+      },
+      "brand": "C&A",
+      "product_code": "0169",
+      "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
+      "InStock": {
+        "stockAvailabilty": true,
+        "stockCount": 20
+      },
+      "newArrived": true,
+      "recommended": true,
+      "bestsellers": false,
+      "color": "yellow",
+      "onSale": {
+        "saleAvailabilty": true,
+        "saleCount": 5
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/06/228.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/06/228.jpg"
+    },
+    {
+      "id": 29,
+      "title": "Round circle earrings",
+      "price": "20.00",
+      "category": {
+        "id": 1,
+        "name": "Accessories",
+        "sub_category": "Jewelry"
+      },
+      "brand": "Ecco",
+      "product_code": "0132",
+      "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
+      "InStock": {
+        "stockAvailabilty": true,
+        "stockCount": 20
+      },
+      "newArrived": true,
+      "recommended": true,
+      "bestsellers": false,
+      "color": "black",
+      "onSale": {
+        "saleAvailabilty": false
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/08/192.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/08/192.jpg"
+    },
+    {
+      "id": 30,
+      "title": "Skinny suit jacket in navy",
+      "price": "160.00",
+      "category": {
+        "id": 1,
+        "name": "Men",
+        "sub_category": "Suits"
+      },
+      "brand": "Chanel",
+      "product_code": "0081",
+      "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
+      "InStock": {
+        "stockAvailabilty": true,
+        "stockCount": 20
+      },
+      "newArrived": true,
+      "recommended": false,
+      "bestsellers": false,
+      "color": "blue",
+      "onSale": {
+        "saleAvailabilty": false
+      },
+      "smallImages": [
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/60.jpg"
+        },
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/79.jpg"
+        },
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/30.jpg"
+        },
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/96-600x799.jpg"
+        },
+        {
+          "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/92.jpg"
+        }
+      ],
+      "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/09/60.jpg"
+    }
+  ]
+}

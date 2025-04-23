@@ -1,0 +1,55 @@
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.head .top {
+  width: 100%;
+  height: 39px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+}
+.head .top span, .head .top .dropicon {
+  color: white;
+  font-size: 11px;
+}
+.head .top .modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.head .nav {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.head .nav .logo img {
+  width: 80px;
+  height: 32px;
+}
+.head .nav .navbar {
+  width: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-size: 12px;
+}
+.head .nav .navbar .navigate {
+  color: black;
+}
+.head .nav .icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.head .nav .icons li {
+  font-size: 20px;
+  color: black;
+}/*# sourceMappingURL=header.module.css.map */

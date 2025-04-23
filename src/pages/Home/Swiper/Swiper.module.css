@@ -1,0 +1,109 @@
+.container {
+  width: 90%;
+}
+
+.section {
+  display: flex;
+  justify-content: center;
+}
+
+.swiper {
+  width: 100%;
+  height: 100vh;
+}
+
+.slide1 {
+  background-image: url(../../../assets/slide-01.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.slide2 {
+  background-image: url(../../../assets/slide2.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.main {
+  font-size: 36px;
+  margin-top: 151px;
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #333333;
+  line-height: 36px;
+  margin-bottom: 10px;
+  animation-name: word;
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+@keyframes word {
+  from {
+    transform: translateY(-170px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.as {
+  color: #333333;
+  font-weight: 400;
+}
+
+.button {
+  margin-top: 33px;
+  width: 180px;
+  height: 50px;
+  line-height: 22px;
+  color: #333;
+  border: 2px solid #333;
+  background: none;
+  text-transform: uppercase;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  animation-name: word1;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+@keyframes word1 {
+  from {
+    transform: translateY(-250px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.swiper-button-prev {
+  color: #333;
+  font-weight: 400;
+  background-color: white;
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+  box-shadow: 0px 3px 6px 1px rgba(0, 0, 0, 0.1);
+}
+.swiper-button-prev:hover {
+  background-color: #bd8448;
+}
+
+.swiper-button-next:hover {
+  background-color: #bd8448;
+}/*# sourceMappingURL=Swiper.module.css.map */

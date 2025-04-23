@@ -1,0 +1,47 @@
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 40px;
+
+
+.sectitle{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 35px;
+
+.subtitle{
+    font-size: 26px;
+    color: #111;
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.3;
+}
+
+}
+
+.items{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+
+    .item{
+    width: calc(35% - 15px) ;
+
+    .catitem{
+        width: 420px;
+        height: 510px;
+    }
+
+    .product{
+        width: 408px;
+        height: 260px;
+    }
+}
+
+}
+}
+

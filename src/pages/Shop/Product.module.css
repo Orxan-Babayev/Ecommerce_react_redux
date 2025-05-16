@@ -1,0 +1,34 @@
+.product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #fff;
+  transition: transform 0.2s;
+}
+
+.product:hover {
+  transform: translateY(-2px);
+}
+
+.product-image {
+  max-width: 100%;
+  height: 150px;
+  object-fit: contain;
+}
+
+.product-title {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+  text-align: center;
+  color: #333;
+}
+
+.product-price {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #d8000c;
+  margin: 0;
+}

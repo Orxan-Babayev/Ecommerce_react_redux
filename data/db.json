@@ -184,7 +184,7 @@
     },
     {
       "id": 7,
-      "name": "Shoes",
+      "name": "Heels",
       "image": "https://loobek-be87.kxcdn.com/loobek/wp-content/uploads/2022/11/cat-shoes.jpg"
     }
   ],
@@ -234,12 +234,10 @@
     {
       "id": 1,
       "title": "LV print mini dress",
-      "price": "90.00",
-      "category": {
-        "id": 1,
-        "name": "Women",
-        "sub_category": "Dresses"
-      },
+      "price": 90.0,
+      "category_name": "Women",
+      "sub_category": "Dresses",
+
       "brand": "Christian Louboutin",
       "product_code": "0051",
       "description": "With the new fashion trends and all the available shopping options you can order your clothes online and make money without even leaving your house.",
@@ -247,9 +245,9 @@
         "stockAvailabilty": true,
         "stockCount": 5
       },
-      "newArrived": true,
+      "newArrived": "false",
       "recommended": true,
-      "bestsellers": true,
+      "bestsellers": "true",
       "color": "white",
       "StockCount": 20,
       "onSale": {
@@ -266,12 +264,10 @@
     {
       "id": 2,
       "title": "Topshop coat in red",
-      "price": "79.00",
-      "category": {
-        "id": 1,
-        "name": "Women",
-        "sub_category": "Coats"
-      },
+      "price": 79.0,
+      "category_name": "Women",
+      "sub_category": "Coats",
+
       "brand": "Topshop",
       "product_code": "0003",
       "description": "With the new fashion trends and all the available shopping options you can order your clothes online and make money without even leaving your house.",
@@ -301,9 +297,9 @@
           "name": "XL"
         }
       ],
-      "newArrived": false,
+      "newArrived": "false",
       "recommended": true,
-      "bestsellers": true,
+      "bestsellers": "true",
       "color": "red",
       "StockCount": 20,
       "onSale": {
@@ -323,12 +319,9 @@
     {
       "id": 3,
       "title": "CK polo with tipping",
-      "price": "70.00",
-      "category": {
-        "id": 1,
-        "name": "Men",
-        "sub_category": "Polo shirts"
-      },
+      "price": 70.0,
+      "category_name": "Men",
+      "sub_category": "Polo shirts",
       "brand": "Chanel",
       "product_code": "0010",
       "description": "With the new fashion trends and all the available shopping options you can order your clothes online and make money without even leaving your house.",
@@ -354,9 +347,9 @@
           "name": "XXl"
         }
       ],
-      "newArrived": false,
+      "newArrived": "false",
       "recommended": false,
-      "bestsellers": false,
+      "bestsellers": "false",
       "color": "green",
       "onSale": {
         "saleAvailabilty": true,
@@ -372,12 +365,10 @@
     {
       "id": 4,
       "title": "Zara t-shirt long sleeve",
-      "price": "30.00",
-      "category": {
-        "id": 1,
-        "name": "Men",
-        "sub_category": "T-Shirts"
-      },
+      "price": 30.0,
+      "category_name": "Men",
+      "sub_category": "T-Shirts",
+
       "brand": "Chopard",
       "product_code": "0042",
       "description": "With the new fashion trends and all the available shopping options you can order your clothes online and make money without even leaving your house.",
@@ -403,9 +394,9 @@
           "name": "XXL"
         }
       ],
-      "newArrived": false,
+      "newArrived": "false",
       "recommended": false,
-      "bestsellers": false,
+      "bestsellers": "false",
       "color": "blue",
       "StockCount": 20,
       "onSale": {
@@ -424,12 +415,9 @@
     {
       "id": 5,
       "title": "Frame round sunglasses",
-      "price": "30.00",
-      "category": {
-        "id": 1,
-        "name": "Accessories",
-        "sub_category": "Glasses"
-      },
+      "price": 30.0,
+      "category_name": "Accessories",
+      "sub_category": "Glasses",
       "brand": "Chanel",
       "product_code": "0043",
       "description": "With the new fashion trends and all the available shopping options you can order your clothes online and make money without even leaving your house.",
@@ -443,9 +431,9 @@
           "name": "M"
         }
       ],
-      "newArrived": false,
+      "newArrived": "false",
       "recommended": false,
-      "bestsellers": false,
+      "bestsellers": "false",
       "color": "brown",
       "StockCount": 20,
       "onSale": {
@@ -462,12 +450,9 @@
     {
       "id": 6,
       "title": "Face makeup brush",
-      "price": "10.00",
-      "category": {
-        "id": 1,
-        "name": "Accessories",
-        "sub_category": "Cosmetics"
-      },
+      "price": 10.0,
+      "category_name": "Accessories",
+      "sub_category": "Cosmetics",
       "brand": "Christian Louboutin",
       "product_code": "0074",
       "description": "With the new fashion trends and all the available shopping options you can order your clothes online and make money without even leaving your house.",
@@ -475,9 +460,9 @@
         "stockAvailabilty": false,
         "stockCount": 0
       },
-      "newArrived": false,
+      "newArrived": "false",
       "recommended": false,
-      "bestsellers": false,
+      "bestsellers": "false",
       "color": "pink",
       "StockCount": 20,
       "onSale": {
@@ -493,21 +478,18 @@
     {
       "id": 7,
       "title": "Suede platform heels",
-      "price": "69.00",
-      "category": {
-        "id": 1,
-        "name": "Shoes",
-        "sub_category": "Heels"
-      },
+      "price": 69.0,
+      "category_name": "Shoes",
+      "sub_category": "Heels",
       "brand": "C&A",
       "description": "With the new fashion trends and all the available shopping options you can order your clothes online and make money without even leaving your house.",
       "InStock": {
         "stockAvailabilty": true,
         "stockCount": 10
       },
-      "newArrived": true,
+      "newArrived": "false",
       "recommended": false,
-      "bestsellers": true,
+      "bestsellers": "true",
       "color": "pink",
       "onSale": {
         "saleAvailabilty": true,
@@ -523,12 +505,9 @@
     {
       "id": 8,
       "title": "Comfort slip on shoes",
-      "price": "30.00",
-      "category": {
-        "id": 1,
-        "name": "Shoes",
-        "sub_category": "Sneakers"
-      },
+      "price": 30.0,
+      "category_name": "Shoes",
+      "sub_category": "Sneakers",
       "brand": "Cartier",
       "description": "With the new fashion trends and all the available shopping options you can order your clothes online and make money without even leaving your house.",
       "InStock": {
@@ -545,9 +524,9 @@
           "name": "M"
         }
       ],
-      "newArrived": true,
+      "newArrived": "false",
       "recommended": true,
-      "bestsellers": true,
+      "bestsellers": "true",
       "color": "white",
       "StockCount": 20,
       "onSale": {
@@ -558,12 +537,9 @@
     {
       "id": 9,
       "title": "Chunky sneakers",
-      "price": "70.00",
-      "category": {
-        "id": 1,
-        "name": "Shoes",
-        "sub_category": "Sneakers"
-      },
+      "price": 70.0,
+      "category_name": "Shoes",
+      "sub_category": "Sneakers",
       "brand": "Topshop",
       "description": "With the new fashion trends and all the available shopping options you can order your clothes online and make money without even leaving your house.",
       "InStock": {
@@ -580,9 +556,9 @@
           "name": "S"
         }
       ],
-      "newArrived": true,
+      "newArrived": "false",
       "recommended": true,
-      "bestsellers": true,
+      "bestsellers": "true",
       "color": "black",
       "StockCount": 20,
       "onSale": {
@@ -594,12 +570,9 @@
     {
       "id": 10,
       "title": "Asso slim suit in black",
-      "price": "150.00",
-      "category": {
-        "id": 1,
-        "name": "Men",
-        "sub_category": "Suits"
-      },
+      "price": 150.0,
+      "category_name": "Men",
+      "sub_category": "Suits",
       "brand": "Burberry",
       "description": "With the new fashion trends and all the available shopping options you can order your clothes online and make money without even leaving your house.",
       "InStock": {
@@ -612,9 +585,9 @@
           "name": "M"
         }
       ],
-      "newArrived": true,
+      "newArrived": "false",
       "recommended": true,
-      "bestsellers": true,
+      "bestsellers": "true",
       "color": "black",
       "StockCount": 20,
       "onSale": {
@@ -625,12 +598,9 @@
     {
       "id": 11,
       "title": "Striped cardigan black",
-      "price": "400.00",
-      "category": {
-        "id": 1,
-        "name": "Women",
-        "sub_category": "Sweatshirts"
-      },
+      "price": 400.0,
+      "category_name": "Women",
+      "sub_category": "Sweatshirts",
       "brand": "Chopard",
       "description": "With the new fashion trends and all the available shopping options you can order your clothes online and make money without even leaving your house.",
       "InStock": {
@@ -643,9 +613,9 @@
           "name": "XXl"
         }
       ],
-      "newArrived": true,
+      "newArrived": "true",
       "recommended": true,
-      "bestsellers": true,
+      "bestsellers": "true",
       "color": "white",
       "StockCount": 20,
       "onSale": {
@@ -657,12 +627,9 @@
     {
       "id": 12,
       "title": "Men’s 35mm classic belt",
-      "price": "46.00",
-      "category": {
-        "id": 1,
-        "name": "Accessories",
-        "sub_category": "Belts"
-      },
+      "price": 46.0,
+      "category_name": "Accessories",
+      "sub_category": "Belts",
       "brand": "Ecco",
       "product_code": "0143",
       "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
@@ -670,9 +637,9 @@
         "stockAvailabilty": true,
         "stockCount": 4
       },
-      "newArrived": false,
+      "newArrived": "false",
       "recommended": false,
-      "bestsellers": false,
+      "bestsellers": "false",
       "color": "black",
       "StockCount": 20,
       "onSale": {
@@ -697,12 +664,9 @@
     {
       "id": 13,
       "title": "Topshop midaxi dress",
-      "price": "180.00",
-      "category": {
-        "id": 1,
-        "name": "Women",
-        "sub_category": "Dresses"
-      },
+      "price": 180.0,
+      "category_name": "Women",
+      "sub_category": "Dresses",
       "brand": "Chow Tai Fook",
       "product_code": "0073",
       "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
@@ -710,9 +674,9 @@
         "stockAvailabilty": true,
         "stockCount": 4
       },
-      "newArrived": true,
+      "newArrived": "true",
       "recommended": false,
-      "bestsellers": false,
+      "bestsellers": "false",
       "color": "black",
       "StockCount": 20,
       "onSale": {
@@ -735,12 +699,9 @@
     {
       "id": 14,
       "title": "Bow gold claw clips",
-      "price": "50.00",
-      "category": {
-        "id": 1,
-        "name": "Accessories",
-        "sub_category": "Jewelry"
-      },
+      "price": 50.0,
+      "category_name": "Accessories",
+      "sub_category": "Jewelry",
       "brand": "Topshop",
       "product_code": "0133",
       "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
@@ -748,9 +709,9 @@
         "stockAvailabilty": true,
         "stockCount": 4
       },
-      "newArrived": false,
+      "newArrived": "true",
       "recommended": false,
-      "bestsellers": true,
+      "bestsellers": "true",
       "color": "yellow",
       "StockCount": 20,
       "onSale": {
@@ -766,21 +727,18 @@
     {
       "id": 15,
       "title": "Shirt whitsome corduroy",
-      "price": "45.00",
-      "category": {
-        "id": 1,
-        "name": "Men",
-        "sub_category": "Pullovers"
-      },
+      "price": 45.0,
+      "category_name": "Men",
+      "sub_category": "Pullovers",
       "brand": "Topshop",
       "product_code": "0085",
       "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
       "InStock": {
         "stockAvailabilty": false
       },
-      "newArrived": false,
+      "newArrived": "true",
       "recommended": false,
-      "bestsellers": false,
+      "bestsellers": "false",
       "color": "white",
       "StockCount": 20,
       "onSale": {
@@ -799,21 +757,18 @@
     {
       "id": 16,
       "title": "Oversized jacket",
-      "price": "90.00",
-      "category": {
-        "id": 1,
-        "name": "Women",
-        "sub_category": "Coats"
-      },
+      "price": 90.0,
+      "category_name": "Women",
+      "sub_category": "Coats",
       "brand": "Chanel",
       "product_code": "0083",
       "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
       "InStock": {
         "stockAvailabilty": false
       },
-      "newArrived": false,
+      "newArrived": "false",
       "recommended": false,
-      "bestsellers": false,
+      "bestsellers": "false",
       "color": "pink",
       "StockCount": 20,
       "onSale": {
@@ -829,12 +784,9 @@
     {
       "id": 17,
       "title": "Sweatshirt in two colors",
-      "price": "50.00",
-      "category": {
-        "id": 1,
-        "name": "Women",
-        "sub_category": "Sweatshirts"
-      },
+      "price": 50.0,
+      "category_name": "Women",
+      "sub_category": "Sweatshirts",
       "brand": "C&A",
       "product_code": "0026",
       "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
@@ -842,9 +794,9 @@
         "stockAvailabilty": true,
         "stockCount": 50
       },
-      "newArrived": false,
+      "newArrived": "false",
       "recommended": false,
-      "bestsellers": false,
+      "bestsellers": "false",
       "color": "pink",
       "StockCount": 20,
       "onSale": {
@@ -861,12 +813,9 @@
     {
       "id": 18,
       "title": "Maxi dress in floral",
-      "price": "140.00",
-      "category": {
-        "id": 1,
-        "name": "Women",
-        "sub_category": "Dresses"
-      },
+      "price": 140.0,
+      "category_name": "Women",
+      "sub_category": "Dresses",
       "brand": "Christian Louboutin",
       "product_code": "0082",
       "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
@@ -896,9 +845,9 @@
           "name": "XL"
         }
       ],
-      "newArrived": false,
+      "newArrived": "false",
       "recommended": false,
-      "bestsellers": false,
+      "bestsellers": "false",
       "color": "pink",
       "StockCount": 20,
       "onSale": {
@@ -927,12 +876,9 @@
     {
       "id": 19,
       "title": "Beautifying face palette",
-      "price": "24.00",
-      "category": {
-        "id": 1,
-        "name": "Accessories",
-        "sub_category": "Cosmetics"
-      },
+      "price": 24.0,
+      "category_name": "Accessories",
+      "sub_category": "Cosmetics",
       "brand": "Ecco",
       "product_code": "0079",
       "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
@@ -940,9 +886,9 @@
         "stockAvailabilty": true,
         "stockCount": 50
       },
-      "newArrived": false,
+      "newArrived": "false",
       "recommended": true,
-      "bestsellers": true,
+      "bestsellers": "true",
       "color": "pink",
       "StockCount": 20,
       "onSale": {
@@ -961,21 +907,18 @@
     {
       "id": 20,
       "title": "Curve 2 in 1 jumpsuit",
-      "price": "39.00",
-      "category": {
-        "id": 1,
-        "name": "Women",
-        "sub_category": "Shirts"
-      },
+      "price": 39.0,
+      "category_name": "Women",
+      "sub_category": "Shirts",
       "brand": "Ecco",
       "product_code": "0018",
       "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
       "InStock": {
         "stockAvailabilty": false
       },
-      "newArrived": false,
+      "newArrived": "false",
       "recommended": false,
-      "bestsellers": false,
+      "bestsellers": "true",
       "color": "green",
       "onSale": {
         "saleAvailabilty": false
@@ -990,12 +933,9 @@
     {
       "id": 21,
       "title": "Vans trainers in white",
-      "price": "60.00",
-      "category": {
-        "id": 1,
-        "name": "Shoes",
-        "sub_category": "Sneakers"
-      },
+      "price": 60.0,
+      "category_name": "Shoes",
+      "sub_category": "Sneakers",
       "brand": "Ecco",
       "product_code": "0091",
       "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
@@ -1003,9 +943,9 @@
         "stockAvailabilty": true,
         "stockCount": 40
       },
-      "newArrived": false,
+      "newArrived": "true",
       "recommended": false,
-      "bestsellers": false,
+      "bestsellers": "false",
       "color": "white",
       "onSale": {
         "saleAvailabilty": false
@@ -1020,12 +960,9 @@
     {
       "id": 22,
       "title": "Asso preppy sunglasses",
-      "price": "40.00",
-      "category": {
-        "id": 1,
-        "name": "Accessories",
-        "sub_category": "Glasses"
-      },
+      "price": 40.0,
+      "category_name": "Accessories",
+      "sub_category": "Glasses",
       "brand": "Cartier",
       "product_code": "0038",
       "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
@@ -1033,9 +970,9 @@
         "stockAvailabilty": true,
         "stockCount": 40
       },
-      "newArrived": true,
+      "newArrived": "true",
       "recommended": false,
-      "bestsellers": true,
+      "bestsellers": "true",
       "color": "black",
       "onSale": {
         "saleAvailabilty": false
@@ -1050,12 +987,9 @@
     {
       "id": 23,
       "title": "Foil spot mini dress",
-      "price": "80.00",
-      "category": {
-        "id": 1,
-        "name": "Women",
-        "sub_category": "Dresses"
-      },
+      "price": 80.0,
+      "category_name": "Women",
+      "sub_category": "Dresses",
       "brand": "Burberry",
       "product_code": "0028",
       "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
@@ -1063,9 +997,9 @@
         "stockAvailabilty": true,
         "stockCount": 40
       },
-      "newArrived": true,
+      "newArrived": "true",
       "recommended": true,
-      "bestsellers": false,
+      "bestsellers": "false",
       "color": "black",
       "onSale": {
         "saleAvailabilty": false
@@ -1080,12 +1014,9 @@
     {
       "id": 24,
       "title": "Cotton shoulder dress",
-      "price": "40.00",
-      "category": {
-        "id": 1,
-        "name": "Women",
-        "sub_category": "Dresses"
-      },
+      "price": 40.0,
+      "category_name": "Women",
+      "sub_category": "Dresses",
       "brand": "Chow Tai Fook",
       "product_code": "0006",
       "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
@@ -1093,9 +1024,9 @@
         "stockAvailabilty": true,
         "stockCount": 40
       },
-      "newArrived": true,
+      "newArrived": "true",
       "recommended": false,
-      "bestsellers": false,
+      "bestsellers": "false",
       "color": "white",
       "onSale": {
         "saleAvailabilty": false
@@ -1110,12 +1041,9 @@
     {
       "id": 25,
       "title": "ALDO top handle bag",
-      "price": "70.00",
-      "category": {
-        "id": 1,
-        "name": "Accessories",
-        "sub_category": "Handbags"
-      },
+      "price": 70.0,
+      "category_name": "Accessories",
+      "sub_category": "Handbags",
       "brand": "Cartier",
       "product_code": "0018",
       "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
@@ -1123,9 +1051,9 @@
         "stockAvailabilty": true,
         "stockCount": 40
       },
-      "newArrived": true,
+      "newArrived": "true",
       "recommended": false,
-      "bestsellers": true,
+      "bestsellers": "true",
       "color": "white",
       "onSale": {
         "saleAvailabilty": true,
@@ -1141,12 +1069,9 @@
     {
       "id": 26,
       "title": "Bracelet watch",
-      "price": "90.00",
-      "category": {
-        "id": 1,
-        "name": "Accessories",
-        "sub_category": "Watches"
-      },
+      "price": 90.0,
+      "category_name": "Accessories",
+      "sub_category": "Watches",
       "brand": "Christian Louboutin",
       "product_code": "0105",
       "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
@@ -1154,9 +1079,9 @@
         "stockAvailabilty": false,
         "stockCount": 0
       },
-      "newArrived": false,
+      "newArrived": "false",
       "recommended": true,
-      "bestsellers": true,
+      "bestsellers": "true",
       "color": "gray",
       "onSale": {
         "saleAvailabilty": false
@@ -1171,12 +1096,9 @@
     {
       "id": 27,
       "title": "Womens oversized sweater",
-      "price": "60.00",
-      "category": {
-        "id": 1,
-        "name": "Women",
-        "sub_category": "Sweatshirts"
-      },
+      "price": 60.0,
+      "category_name": "Women",
+      "sub_category": "Sweatshirts",
       "brand": "Chanel",
       "product_code": "0063",
       "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
@@ -1184,9 +1106,9 @@
         "stockAvailabilty": true,
         "stockCount": 20
       },
-      "newArrived": true,
+      "newArrived": "true",
       "recommended": true,
-      "bestsellers": false,
+      "bestsellers": "false",
       "color": "red",
       "onSale": {
         "saleAvailabilty": true,
@@ -1202,12 +1124,9 @@
     {
       "id": 28,
       "title": "Chloe perfum spray 1.7 Oz",
-      "price": "120.00",
-      "category": {
-        "id": 1,
-        "name": "Accessories",
-        "sub_category": "Perfumes"
-      },
+      "price": 120.0,
+      "category_name": "Accessories",
+      "sub_category": "Perfumes",
       "brand": "C&A",
       "product_code": "0169",
       "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
@@ -1215,9 +1134,9 @@
         "stockAvailabilty": true,
         "stockCount": 20
       },
-      "newArrived": true,
+      "newArrived": "false",
       "recommended": true,
-      "bestsellers": false,
+      "bestsellers": "false",
       "color": "yellow",
       "onSale": {
         "saleAvailabilty": true,
@@ -1233,12 +1152,9 @@
     {
       "id": 29,
       "title": "Round circle earrings",
-      "price": "20.00",
-      "category": {
-        "id": 1,
-        "name": "Accessories",
-        "sub_category": "Jewelry"
-      },
+      "price": 20.0,
+      "category_name": "Accessories",
+      "sub_category": "Jewelry",
       "brand": "Ecco",
       "product_code": "0132",
       "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
@@ -1246,9 +1162,9 @@
         "stockAvailabilty": true,
         "stockCount": 20
       },
-      "newArrived": true,
+      "newArrived": "true",
       "recommended": true,
-      "bestsellers": false,
+      "bestsellers": "false",
       "color": "black",
       "onSale": {
         "saleAvailabilty": false
@@ -1263,12 +1179,9 @@
     {
       "id": 30,
       "title": "Skinny suit jacket in navy",
-      "price": "160.00",
-      "category": {
-        "id": 1,
-        "name": "Men",
-        "sub_category": "Suits"
-      },
+      "price": 160.0,
+      "category_name": "Men",
+      "sub_category": "Suits",
       "brand": "Chanel",
       "product_code": "0081",
       "description": "These days you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on youtube, keep yourself updated on social media, and of course also shop online!",
@@ -1276,9 +1189,9 @@
         "stockAvailabilty": true,
         "stockCount": 20
       },
-      "newArrived": true,
+      "newArrived": "true",
       "recommended": false,
-      "bestsellers": false,
+      "bestsellers": "false",
       "color": "blue",
       "onSale": {
         "saleAvailabilty": false

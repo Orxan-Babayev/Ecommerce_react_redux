@@ -1,0 +1,39 @@
+.checkboxGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.checkboxLabel {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.checkboxItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.noOptions {
+  font-style: italic;
+  color: #888;
+}
+
+.hiddenCheckbox {
+  display: none;
+}
+
+input[type="checkbox"]:checked {
+  accent-color: #444;
+}
+
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  /* accent-color: #444; ✅ Make checkmark black */
+  transform: scale(1.3); /* ✅ Resize checkbox */
+  cursor: pointer;
+}

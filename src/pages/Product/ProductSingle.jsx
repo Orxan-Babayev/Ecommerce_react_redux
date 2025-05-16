@@ -9,14 +9,14 @@ import {
 } from "../../redux/slice/wishlistSlice";
 import { addItem, updateCartItemQuantity } from "../../redux/slice/cartSlice";
 
-const Product = () => {
+const ProductSingle = () => {
   const { id } = useParams();
-
   const dispatch = useDispatch();
 
   const item = useSelector((state) =>
-    state.productdetail.products.find((product) => product.id === id)
+    state.productdetail.products.find((product) => product.id === Number(id))
   );
+  console.log(item);
   //  change and selector plsce to slicer  and this id is id where i get from url and and i send it to slicer and find product where id
 
   const wishlistItems = useSelector((state) => state.wishlist.items);
@@ -86,7 +86,7 @@ const Product = () => {
       <img src={item.image} alt="" />
       <h2>{item.title}</h2>
       <p>{item.description}</p>
-      <p>{item.category.name}</p>
+      <p>{item.category_name}</p>
       <p>In Stock: {item.InStock.stockCount}</p>
       {/* item  page */}
       {item.sizes && (
@@ -135,4 +135,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default ProductSingle;

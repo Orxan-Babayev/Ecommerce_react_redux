@@ -1,144 +1,96 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import styles from './NewArrivals.module.scss'
-import product1 from '../../../assets/product1.jpg'
-import product2 from '../../../assets/product2.jpg'
-import product3 from '../../../assets/product3.jpg'
-import product4 from '../../../assets/product4.jpg'
-import product5 from '../../../assets/product5.jpg'
-import product6 from '../../../assets/product6.jpg'
-import product7 from '../../../assets/product7.jpg'
-import product8 from '../../../assets/product8.jpg'
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import {
+  fetchNewArrivals,
+  selectNewArrivalsData,
+  selectNewArrivalsSkip,
+  selectNewArrivalsHasMore,
+} from "../../../redux/slice/productSlice";
+import styles from "./NewArrivals.module.scss";
 
 const NewArrivals = () => {
+  const dispatch = useDispatch();
+  const products = useSelector(selectNewArrivalsData);
+
+  const newArrivals = useSelector(selectNewArrivalsData);
+
+  const start = useSelector(selectNewArrivalsSkip);
+  const hasMore = useSelector(selectNewArrivalsHasMore);
+  const { loading, error } = useSelector((state) => state.product);
+  console.log(newArrivals);
+
+  // useEffect(() => {
+  //   dispatch(fetchNewArrivals({ start: 0, batchSize: 8 }));
+  // }, [dispatch]);
+
+  useEffect(() => {
+    if (newArrivals.length === 0 && !loading) {
+      dispatch(fetchNewArrivals({ start: 0, limit: 8 }));
+    }
+  }, [dispatch]); // Remove newArrivals.length dependency
+  // Handle "Discover More" click to load 4 more products
+  const handleLoadMore = () => {
+    dispatch(fetchNewArrivals({ start, batchSize: 4 }));
+  };
   return (
-    <div className={styles.container}>
-        <div className={styles.header}>
-            <h3 className={styles.main}> New Arrivals </h3>
-            <p>We have your occasion covered</p>
-        </div>
+    <section className={styles.container}>
+      <div className={styles.header}>
+        <h3 className={styles.main}>New Arrivals</h3>
+        <p>We have your occasion covered</p>
+      </div>
+      {newArrivals.length ? (
         <div className={styles.items}>
-            <div className={styles.item}>
-                <Link>
-                <div>
-                    <img className={styles.img} src={product1} alt="" />
-                    <div> </div>
+          {newArrivals.map((product) => (
+            <div key={product.id} className={styles.item}>
+              <Link
+                to={`/product/${product.id}`}
+                className={styles.link}
+                aria-label={`View ${product.title}`}
+              >
+                <div className={styles.imageWrapper}>
+                  <img
+                    className={styles.img}
+                    src={product.image}
+                    alt={product.title}
+                    loading="lazy"
+                  />
                 </div>
                 <div className={styles.card}>
-                    <h3 className={styles.title}>Everyday Tube Top Ribbed</h3>
-                    <span className={styles.price}>$180.00</span>
-                    <ul></ul>
+                  <h3 className={styles.title}>{product.title}</h3>
+                  <span className={styles.price}>
+                    {/* `${product.price.toFixed(2)}` */}
+                  </span>
                 </div>
-                </Link>
+              </Link>
             </div>
-
-            <div className={styles.item}>
-                <Link>
-                <div>
-                    <img className={styles.img} src={product2} alt="" />
-                    <div> </div>
-                </div>
-                <div className={styles.card}>
-                    <h3 className={styles.title}>Long Maxi Dress</h3>
-                    <span className={styles.price}>$180.00</span>
-                    <ul></ul>
-                </div>
-                </Link>
-            </div>
-            
-            <div className={styles.item}>
-                <Link>
-                <div>
-                    <img className={styles.img} src={product3} alt="" />
-                    <div> </div>
-                </div>
-                <div className={styles.card}>
-                    <h3 className={styles.title}>Solid Cargo Pant</h3>
-                    <span className={styles.price}>$180.00</span>
-                    <ul></ul>
-                </div>
-                </Link>
-            </div>
-
-            <div className={styles.item}>
-                <Link>
-                <div>
-                    <img className={styles.img} src={product4} alt="" />
-                    <div> </div>
-                </div>
-                <div className={styles.card}>
-                    <h3 className={styles.title}>Everyday Tube Top Ribbed</h3>
-                    <span className={styles.price}>$180.00</span>
-                    <ul></ul>
-                </div>
-                </Link>
-            </div>
-
-            <div className={styles.item}>
-                <Link>
-                <div>
-                    <img className={styles.img} src={product5} alt="" />
-                    <div> </div>
-                </div>
-                <div className={styles.card}>
-                    <h3 className={styles.title}>Everyday Tube Top Ribbed</h3>
-                    <span className={styles.price}>$180.00</span>
-                    <ul></ul>
-                </div>
-                </Link>
-            </div>
-
-            <div className={styles.item}>
-                <Link>
-                <div>
-                    <img className={styles.img} src={product6} alt="" />
-                    <div> </div>
-                </div>
-                <div className={styles.card}>
-                    <h3 className={styles.title}>Everyday Tube Top Ribbed</h3>
-                    <span className={styles.price}>$180.00</span>
-                    <ul></ul>
-                </div>
-                </Link>
-            </div>
-
-            <div className={styles.item}>
-                <Link>
-                <div>
-                    <img className={styles.img} src={product7} alt="" />
-                    <div> </div>
-                </div>
-                <div className={styles.card}>
-                    <h3 className={styles.title}>Everyday Tube Top Ribbed</h3>
-                    <span className={styles.price}>$180.00</span>
-                    <ul></ul>
-                </div>
-                </Link>
-            </div>
-
-            <div className={styles.item}>
-                <Link>
-                <div>
-                    <img className={styles.img} src={product8} alt="" />
-                    <div> </div>
-                </div>
-                <div className={styles.card}>
-                    <h3 className={styles.title}>Everyday Tube Top Ribbed</h3>
-                    <span className={styles.price}>$180.00</span>
-                    <ul></ul>
-                </div>
-                </Link>
-            </div> 
-
+          ))}
         </div>
-        <button className={styles.button}>
-            Discover More
+      ) : error ? (
+        <div className={styles.error} aria-live="assertive">
+          Error: {error}
+        </div>
+      ) : loading ? (
+        <div className={styles.loader} aria-live="polite">
+          Loading new arrivals...
+        </div>
+      ) : (
+        <div className={styles.empty} aria-live="polite">
+          No new arrivals available
+        </div>
+      )}
+      {hasMore && (
+        <button
+          onClick={handleLoadMore}
+          className={styles.button}
+          disabled={loading}
+          aria-label="Load 4 more new arrivals"
+        >
+          {loading ? "Loading..." : "Discover More"}
         </button>
+      )}
+    </section>
+  );
+};
 
-    </div>
- 
-
-  )
-}
-
-export default NewArrivals
+export default NewArrivals;

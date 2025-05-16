@@ -1,59 +1,79 @@
-import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import { Navigation } from 'swiper/modules';
-import brand1 from '../../../assets/brand1.avif'
-import brand2 from '../../../assets/brand2.avif'
-import brand3 from '../../../assets/brand3.avif'
-import brand4 from '../../../assets/brand4.avif'
-import brand5 from '../../../assets/brand5.avif'
-import brand6 from '../../../assets/brand6.avif'
-import brand7 from '../../../assets/brand7.avif'
-import style from './BrandSwiper.module.scss'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import {
+  fetchBrands,
+  selectBrands,
+  toggleBrand,
+} from "../../../redux/slice/productSlice";
+import styles from "./BrandSwiper.module.scss";
 
+const BrandSwiper = () => {
+  const dispatch = useDispatch();
+  const brands = useSelector(selectBrands);
+  const { loading, error } = useSelector((state) => state.product);
 
-const brand = [
-{brand: brand1},
-{brand: brand2},
-{brand: brand3},
-{brand: brand4},
-{brand: brand5},
-{brand: brand6},
-{brand: brand7}
+  // Fetch brands on mount
+  useEffect(() => {
+    dispatch(fetchBrands());
+  }, [dispatch]);
 
-]
+  // Handle brand click
+  const handleBrandClick = (brandName) => {
+    dispatch(toggleBrand(brandName));
+  };
 
-const Brandswiper = () => {
-   
-    return (
-        <div >
-        <Swiper  style = {{"--swiper-navigation-size":"25px"}} 
-        spaceBetween={10}
-        slidesPerView={7}
-           
-        loop = {true}
-        pagination={{
-          clickable: true,
-          loop: true
-
-        }}
-
-        cssMode={true}
-        navigation={true}
-        modules={[ Navigation]}
-      
-      >
-            {brand.map((brand, index) => (
-                <SwiperSlide key={index}   className={style.brand} >
-                    <div  className={style.background}>
-                        <img src={brand.brand} alt=""  className={style.brandimg}  />
-                    </div>
-                </SwiperSlide>
-            ))}
+  return (
+    <section className={styles.brandSwiper}>
+      <h2 className={styles.header}>Shop by Brand</h2>
+      {brands.length ? (
+        <Swiper
+          style={{ "--swiper-navigation-size": "25px" }}
+          spaceBetween={10}
+          slidesPerView={7}
+          loop={brands.length >= 7}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          modules={[Navigation]}
+          className={styles.swiper}
+        >
+          {brands.map((brand) => (
+            <SwiperSlide key={brand.id} className={styles.brand}>
+              <Link
+                to="/shop"
+                className={styles.brandLink}
+                onClick={() => handleBrandClick(brand.brand)}
+                aria-label={`Filter products by ${brand.brand}`}
+              >
+                <div className={styles.background}>
+                  <span className={styles.brandName}>{brand.brand}</span>
+                </div>
+              </Link>
+            </SwiperSlide>
+          ))}
         </Swiper>
+      ) : error ? (
+        <div className={styles.error} aria-live="assertive">
+          Error: {error}
         </div>
-    );
+      ) : loading ? (
+        <div className={styles.loader} aria-live="polite">
+          Loading brands...
+        </div>
+      ) : (
+        <div className={styles.empty} aria-live="polite">
+          No brands available
+        </div>
+      )}
+    </section>
+  );
 };
 
-export default Brandswiper;
+export default BrandSwiper;

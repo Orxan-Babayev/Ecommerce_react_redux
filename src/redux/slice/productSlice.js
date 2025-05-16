@@ -5,16 +5,290 @@ import {
 } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Async Thunks
+export const buildQuery = (filters) => {
+  const params = new URLSearchParams();
+  const paramMap = {
+    category: "category_name",
+    subcategory: "sub_category",
+    newArrived: "newArrived",
+    bestsellers: "bestsellers",
+    minPrice: "price_gte",
+    maxPrice: "price_lte",
+    searchQuery: "title_like",
+    color: "color",
+    brands: "brand",
+    limit: "_limit",
+    start: "_start",
+    sort: "_sort",
+    order: "_order",
+  };
+
+  const sanitize = (value) => {
+    if (value === null || value === undefined) return "";
+    return encodeURIComponent(String(value));
+  };
+
+  Object.entries(filters).forEach(([key, value]) => {
+    if (key in paramMap && value !== undefined && value !== null) {
+      const mappedKey = paramMap[key];
+      if (Array.isArray(value)) {
+        value.forEach((val) => {
+          if (val !== null && val !== undefined && val !== "") {
+            params.append(mappedKey, sanitize(val));
+          }
+        });
+      } else {
+        const sanitizedValue = sanitize(value);
+        if (sanitizedValue !== "") {
+          params.append(mappedKey, sanitizedValue);
+        }
+      }
+    }
+  });
+
+  const query = params.toString();
+  console.log(query);
+  return query ? `?${query}` : "";
+};
+
+export const validateFilters = ({ minPrice, maxPrice, color, brands }) => {
+  if (minPrice !== undefined && minPrice < 0) {
+    throw new Error("minPrice cannot be negative");
+  }
+  if (maxPrice !== undefined && maxPrice < minPrice) {
+    throw new Error("maxPrice cannot be less than minPrice");
+  }
+  if (color && !Array.isArray(color)) {
+    throw new Error("colors must be an array");
+  }
+  if (brands && !Array.isArray(brands)) {
+    throw new Error("brands must be an array");
+  }
+};
+
 export const fetchData = createAsyncThunk(
-  "shop/fetchData",
-  async (_, { rejectWithValue }) => {
+  "product/fetchData",
+  async (
+    {
+      category,
+      subcategory,
+      minPrice,
+      maxPrice,
+      searchQuery,
+      color,
+      brands,
+      sortingOption,
+    } = {},
+    { rejectWithValue }
+  ) => {
     try {
-      const res = await axios.get("http://localhost:8001/products");
+      validateFilters({ minPrice, maxPrice, color, brands });
+
+      // Base filters (excluding color and brands for multi-select)
+      const baseFilters = {
+        category,
+        subcategory,
+        minPrice,
+        maxPrice,
+        searchQuery,
+      };
+
+      // Apply sorting
+      if (sortingOption === "price_low_to_high") {
+        baseFilters.sort = "price";
+        baseFilters.order = "asc";
+      } else if (sortingOption === "price_high_to_low") {
+        baseFilters.sort = "price";
+        baseFilters.order = "desc";
+      }
+
+      // Special case: both color and brands have multiple selections
+      if (
+        (Array.isArray(color) && color.length > 0) ||
+        (Array.isArray(brands) && brands.length > 0)
+      ) {
+        // We'll use a Set to avoid duplicate products
+        const productMap = new Map();
+
+        // If colors are selected, fetch products for each color
+        if (Array.isArray(color) && color.length > 0) {
+          for (const singleColor of color) {
+            const colorFilter = { ...baseFilters, color: singleColor };
+
+            // If brands are also selected, we need to handle combinations
+            if (Array.isArray(brands) && brands.length > 0) {
+              for (const singleBrand of brands) {
+                const combinedFilter = { ...colorFilter, brands: singleBrand };
+                const query = buildQuery(combinedFilter);
+
+                console.log(
+                  `Fetching color: ${singleColor}, brand: ${singleBrand} with query: ${query}`
+                );
+                const res = await axios.get(
+                  `http://localhost:8001/products${query}`
+                );
+
+                if (Array.isArray(res.data)) {
+                  // Add products to our map using ID as key to avoid duplicates
+                  res.data.forEach((product) => {
+                    productMap.set(product.id, product);
+                  });
+                }
+              }
+            } else {
+              // Only color is selected, no brands
+              const query = buildQuery(colorFilter);
+
+              console.log(
+                `Fetching color: ${singleColor} with query: ${query}`
+              );
+              const res = await axios.get(
+                `http://localhost:8001/products${query}`
+              );
+
+              if (Array.isArray(res.data)) {
+                res.data.forEach((product) => {
+                  productMap.set(product.id, product);
+                });
+              }
+            }
+          }
+        }
+        // If only brands are selected (no colors)
+        else if (Array.isArray(brands) && brands.length > 0) {
+          for (const singleBrand of brands) {
+            const brandFilter = { ...baseFilters, brands: singleBrand };
+            const query = buildQuery(brandFilter);
+
+            console.log(`Fetching brand: ${singleBrand} with query: ${query}`);
+            const res = await axios.get(
+              `http://localhost:8001/products${query}`
+            );
+
+            if (Array.isArray(res.data)) {
+              res.data.forEach((product) => {
+                productMap.set(product.id, product);
+              });
+            }
+          }
+        }
+
+        // Convert map values to array
+        const allProducts = [...productMap.values()];
+
+        // Apply sorting to combined results
+        if (sortingOption === "price_low_to_high") {
+          allProducts.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+        } else if (sortingOption === "price_high_to_low") {
+          allProducts.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+        }
+
+        return allProducts;
+      }
+
+      // For single filters or no filters, use the original approach
+      const filters = {
+        category,
+        subcategory,
+        minPrice,
+        maxPrice,
+        searchQuery,
+        color: Array.isArray(color) && color.length === 1 ? color[0] : color,
+        brands:
+          Array.isArray(brands) && brands.length === 1 ? brands[0] : brands,
+      };
+
+      if (sortingOption === "price_low_to_high") {
+        filters.sort = "price";
+        filters.order = "asc";
+      } else if (sortingOption === "price_high_to_low") {
+        filters.sort = "price";
+        filters.order = "desc";
+      }
+
+      const query = buildQuery(filters);
+      console.log("Fetching with query:", query);
+      const res = await axios.get(`http://localhost:8001/products${query}`);
+      console.log(res.data);
+
+      if (!Array.isArray(res.data)) {
+        throw new Error("Expected an array of products");
+      }
+
       return res.data;
     } catch (error) {
       console.error("Error fetching products:", error.message);
-      return rejectWithValue({ message: error.message });
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchBestSellers = createAsyncThunk(
+  "product/fetchBestSellers",
+  async (_, { rejectWithValue }) => {
+    try {
+      const query = buildQuery({ bestsellers: true });
+      console.log(query);
+      const res = await axios.get(`http://localhost:8001/products${query}`);
+
+      if (!Array.isArray(res.data)) {
+        throw new Error("Expected an array of bestseller products");
+      }
+
+      return res.data;
+    } catch (error) {
+      console.error("Error fetching bestsellers:", error.message);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchNewArrivals = createAsyncThunk(
+  "product/fetchNewArrivals",
+  async ({ start = 0, batchSize = 8 } = {}, { rejectWithValue }) => {
+    try {
+      // Fetch paginated new arrivals
+      const query = buildQuery({ newArrived: true, start, limit: batchSize });
+      const res = await axios.get(`http://localhost:8001/products${query}`);
+      if (!Array.isArray(res.data)) {
+        throw new Error("Expected an array of new arrival products");
+      }
+
+      // Fetch total count of new arrivals (without pagination)
+      const totalQuery = buildQuery({ newArrived: true });
+      const totalRes = await axios.get(
+        `http://localhost:8001/products${totalQuery}`
+      );
+      const totalItems = totalRes.data.length;
+      console.log(totalItems);
+
+      const hasMore =
+        start + res.data.length < totalItems && res.data.length === batchSize;
+      console.log(
+        start + res.data.length < totalItems && res.data.length === batchSize
+      );
+      console.log(start);
+
+      return { products: res.data, start, hasMore };
+    } catch (error) {
+      console.error("Error fetching new arrivals:", error.message);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchTopCategories = createAsyncThunk(
+  "product/fetchTopCategories",
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await axios.get("http://localhost:8001/top-categories");
+      if (!Array.isArray(res.data)) {
+        throw new Error("Expected an array of top categories");
+      }
+      return res.data;
+    } catch (error) {
+      console.error("Error fetching top categories:", error.message);
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -37,6 +311,7 @@ export const fetchColors = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const res = await axios.get("http://localhost:8001/colors");
+      console.log(res.data);
       return res.data;
     } catch (error) {
       console.error("Error fetching colors:", error.message);
@@ -46,26 +321,21 @@ export const fetchColors = createAsyncThunk(
 );
 
 export const fetchBrands = createAsyncThunk(
-  "shop/fetchBrands",
+  "product/fetchBrands",
   async (_, { rejectWithValue }) => {
     try {
       const res = await axios.get("http://localhost:8001/brands");
+      if (!Array.isArray(res.data)) {
+        throw new Error("Expected an array of brands");
+      }
+
       return res.data;
     } catch (error) {
       console.error("Error fetching brands:", error.message);
-      return rejectWithValue({ message: error.message });
+      return rejectWithValue(error.message);
     }
   }
 );
-
-//  asyncThunk for handle global remote states async operations which have connect to external world
-// asyncThunk take arguments name like in reducer name and , actions shop/fetchedBrands
-// and  _  which shows async is not take any argument rejectWithValue object if fetched prosses will not get success
-// try and catch for better handle result
-//use axios get method for fetched from endpoint
-// return res data
-// catch for error take error message and console error
-//  return rejectWithValue get error mesage
 
 // Initial State
 const initialState = {
@@ -73,28 +343,25 @@ const initialState = {
   categories: [],
   colors: [],
   brands: [],
+  bestSellersData: [],
+  newArrivalsData: [],
+  newArrivalsSkip: 0, // Track number of products fetched
+  newArrivalsHasMore: true, // Track if more products exist
+  topCategories: [], // New state for top-categories
   loading: false,
   error: null,
-  searchQuery: "",
-  minPrice: 0,
-  maxPrice: undefined,
-  sortingOption: "",
-  selectedCategory: null,
-  selectedSubcategory: "",
-  selectedColors: [],
-  selectedBrands: [],
-};
 
-//  data, categories, colors, brands, is array which getted from asyncThunk fetchData result will added
-// loading is false and used in asyncThunk life pedding...
-//  error null is means their is no error and mainly result which comes from rejectWithValue is string
-// searchQuery is string because get e target vcalue from input
-//  minPrice 0 number from input
-//  can be a string because it is  a number and can be 0 because 0 minPirice and 0 maxPrice can be Filterd it oi a wrong
-//  unefined when maxPrice didnt given it shows all products above minPrice
-//  sorting it also get dispatched value from select
-//  selcctCategory is not select and === null shows no category is selected it only select one category and subCategory ""
-// means it pass all subCategories
+  filters: {
+    searchQuery: "",
+    minPrice: null,
+    maxPrice: undefined,
+    sortingOption: "",
+    selectedCategory: null,
+    selectedSubcategory: "",
+    selectedColors: [],
+    selectedBrands: [],
+  },
+};
 
 // Slice Definition
 export const productSlice = createSlice({
@@ -102,84 +369,136 @@ export const productSlice = createSlice({
   initialState,
   reducers: {
     setSearchQuery: (state, action) => {
-      state.searchQuery = action.payload;
+      state.filters.searchQuery = action.payload;
     },
-    // gets disPatched e target value which may use to local state and sent to payload
+
     setPriceFilter: (state, action) => {
-      state.minPrice = isNaN(action.payload.minPrice)
+      state.filters.minPrice = isNaN(action.payload.minPrice)
         ? 0
         : action.payload.minPrice;
-      state.maxPrice = isNaN(action.payload.maxPrice)
+      state.filters.maxPrice = isNaN(action.payload.maxPrice)
         ? undefined
         : action.payload.maxPrice;
     },
-    // get input data and isNan fro if some one leave empty input or write string it isNan(Nan) will give 0
-    // else give number or in maxPrice sutiatoin Nan give undeifned means bo number selected oelse give number
+
     setSortingOption: (state, action) => {
-      state.sortingOption = action.payload;
+      state.filters.sortingOption = action.payload;
     },
-    //  it gives value select and
+
     setCategory: (state, action) => {
-      state.selectedCategory = action.payload;
-      state.selectedSubcategory = "";
-      state.selectedColors = [];
-      state.selectedBrands = [];
+      state.filters.selectedCategory = action.payload;
+      state.filters.selectedSubcategory = "";
+      state.filters.selectedColors = [];
+      state.filters.selectedBrands = [];
     },
-    // when Cateegory selcted it get one category and make selectedSubcategry to "" fro pass all subCategroies
+
     setSubcategory: (state, action) => {
-      state.selectedSubcategory = action.payload;
+      state.filters.selectedSubcategory = action.payload;
     },
-    // it will select sub Cat
+
     toggleColor: (state, action) => {
       const color = action.payload;
-      state.selectedColors = state.selectedColors.includes(color)
-        ? state.selectedColors.filter((c) => c !== color)
-        : [...state.selectedColors, color];
+      state.filters.selectedColors = state.filters.selectedColors.includes(
+        color
+      )
+        ? state.filters.selectedColors.filter((c) => c !== color)
+        : [...state.filters.selectedColors, color];
     },
-    //  get payload = color  we mutate color and if selectedColors arr includes color filter selectedColors
-    // interesting why because selectedColors  = selctedColors filter color which i thing it mutation briefly
-    // if selectedColors state include color filkter this color from selectedColors state else crate new arr spread
-    // sel;ectedColors and add color object
 
     toggleBrand: (state, action) => {
       const brand = action.payload;
-      state.selectedBrands = state.selectedBrands.includes(brand)
-        ? state.selectedBrands.filter((b) => b !== brand)
-        : [...state.selectedBrands, brand];
+      state.filters.selectedBrands = state.filters.selectedBrands.includes(
+        brand
+      )
+        ? state.filters.selectedBrands.filter((b) => b !== brand)
+        : [...state.filters.selectedBrands, brand];
     },
-    //  same logic as a selcectedColors
 
     resetFilters: (state) => {
-      state.searchQuery = "";
-      state.minPrice = 0;
-      state.maxPrice = undefined;
-      state.sortingOption = "";
-      state.selectedCategory = null;
-      state.selectedSubcategory = "";
-      state.selectedColors = [];
-      state.selectedBrands = [];
+      state.filters.searchQuery = "";
+      state.filters.minPrice = 0;
+      state.filters.maxPrice = undefined;
+      state.filters.sortingOption = "";
+      state.filters.selectedCategory = null;
+      state.filters.selectedSubcategory = "";
+      state.filters.selectedColors = [];
+      state.filters.selectedBrands = [];
     },
   },
-  //  rset states searchQueary min max, sortingOptions, Categories and subCategories, selectedColors, selectedBrands
 
   extraReducers: (builder) => {
     builder
+      // fetchTopCategories
+
+      .addCase(fetchTopCategories.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchTopCategories.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.topCategories = payload;
+      })
+      .addCase(fetchTopCategories.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      })
+
+      // fetchedNewArrials
+
+      .addCase(fetchNewArrivals.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+
+      .addCase(fetchNewArrivals.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        // Reset newArrivalsData for initial fetch (start: 0), append otherwise
+        state.newArrivalsData =
+          payload.start === 0
+            ? payload.products
+            : [...state.newArrivalsData, ...payload.products];
+        state.newArrivalsSkip = payload.start + payload.products.length;
+        state.newArrivalsHasMore = payload.hasMore;
+      })
+      .addCase(fetchNewArrivals.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      })
+
+      //  fetchedData
+
       .addCase(fetchData.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      // loading true  error null means no error
+
       .addCase(fetchData.fulfilled, (state, action) => {
         state.loading = false;
+        state.error = null;
         state.data = action.payload;
       })
-      // data arr get fetchedData return
+
       .addCase(fetchData.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload.message;
+        state.error = action.payload;
       })
-      // if rejected means loading state become false and error take mesage why use this loading ui for spinner
-      // isloading return spinner
+
+      // fetchedbestSellers
+
+      .addCase(fetchBestSellers.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchBestSellers.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.bestSellersData = payload;
+      })
+      .addCase(fetchBestSellers.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      })
+
+      // fetched category
 
       .addCase(fetchCategories.pending, (state) => {
         state.loading = true;
@@ -194,6 +513,9 @@ export const productSlice = createSlice({
         state.loading = false;
         state.error = action.payload.message;
       })
+
+      // fetcehedcolors
+
       .addCase(fetchColors.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -206,6 +528,9 @@ export const productSlice = createSlice({
         state.loading = false;
         state.error = action.payload.message;
       })
+
+      //  fetchedbrands
+
       .addCase(fetchBrands.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -216,7 +541,7 @@ export const productSlice = createSlice({
       })
       .addCase(fetchBrands.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload.shortcutsmessage;
+        state.error = action.payload.message;
       });
   },
 });
@@ -232,108 +557,42 @@ export const {
   toggleBrand,
   resetFilters,
 } = productSlice.actions;
-//
 
-// this are actions we import tthis actions to component and use it when dispatch like dispatch name of action
-// data which we want to dispatch
-//  toggle is add to arr or if color in arr to delete
-//  toggleColor, toggleBrand is about selectColor and Brand arr in action we put in colors and if color alreadfy in
-//  arr we filter it all is mutation
-// fetched pro only for map and
-
-// Selectors
 export const selectData = (state) => state.product.data;
+// data get fetched
+export const selectBestSellersData = (state) => state.product.bestSellersData;
+// best seller fetched
+export const selectNewArrivalsData = (state) => state.product.newArrivalsData;
+export const selectNewArrivalsSkip = (state) => state.product.newArrivalsSkip;
+export const selectNewArrivalsHasMore = (state) =>
+  state.product.newArrivalsHasMore;
+//  new Arrival and load
 export const selectCategories = (state) => state.product.categories;
-export const selectColors = (state) => state.product.colors;
-export const selectBrands = (state) => state.product.brands;
-export const selectSortingOption = (state) => state.product.sortingOption || "";
-export const selectSearchQuery = (state) => state.product.searchQuery;
 
-//  this are selectros is best way because after write selector in reducer we export object to component
-//  we give data from asyncThunk and after select we map this
+// all fetched cat
+export const selectColors = (state) => state.product.colors;
+// fetched color
+export const selectBrands = (state) => state.product.brands;
+// fetched brand
+export const selectTopCategories = (state) => state.product.topCategories;
+// fetched top
+export const selectFilters = (state) => state.product.filters;
+
+export const selectSearchQuery = (state) => state.product.filters.searchQuery;
 
 export const selectFilteredProducts = createSelector(
-  [
-    selectData,
-    (state) => state.product.searchQuery,
-    (state) => state.product.minPrice,
-    (state) => state.product.maxPrice,
-    (state) => state.product.selectedCategory,
-    (state) => state.product.selectedSubcategory,
-    (state) => state.product.selectedColors,
-    (state) => state.product.selectedBrands,
-    selectSortingOption,
-  ],
-  // selectData all products geted from fetchData
-  // it like input  other states are states that gets from dispatch
-  //  and we use this for filtering
-  // products is all products and fiter it = to filtered products
-  //
+  [selectData],
+  (products) => [...products]
+);
 
-  (
-    products,
-    searchQuery,
-    minPrice,
-    maxPrice,
-    category,
-    subcategory,
-    colors,
-    brands,
-    sortingOption
-  ) => {
-    let filtered = products.filter(
-      (product) =>
-        (!searchQuery ||
-          product.title.toLowerCase().includes(searchQuery.toLowerCase())) &&
-        product.price >= (minPrice || 0) &&
-        (!maxPrice || product.price <= maxPrice) &&
-        (!category || product.category?.name === category) &&
-        (!subcategory || product.category?.sub_category === subcategory) &&
-        (colors.length === 0 || colors.includes(product.color)) &&
-        (brands.length === 0 || brands.includes(product.brand))
-    );
-    // if !searchQuery nothing happens if searchQuery exsist  product title LOwerCase includes
-    // searchQuery lowerCase can see  product data in data it has title subcategory and ....
-    // product single product from data wich export to component name selectDataa which is fetched from fetchData
-    // product price we check dispstched minPrice is 0 or get nubmer and max similar if maxprice exsist because if it not
-    // exsist it undefined
-    // category ? if api error or some products dont have category
-    // Thank you for zooming in on the ?. (optional chaining) in the selectFilteredProducts selector,
-    // specifically its role in ensuring no error if product.category is undefined.
-    // Problem
-    // Ideally, every product has a category object with name and sub_category.
-    // But, if product.category is undefined (due to inconsistent data, API errors, or incomplete products),
-    //  accessing product.category.name would throw:
-    // javascript
-    // product.category.name // Error if product.category is undefine
-    // How ?. Helps
-    // Safe Access:
-    // product.category?.name:
-    // If product.category exists, accesses name (e.g., 'Electronics').
-    // If product.category is undefined or null, returns undefined (no error).
-    // product.category?.sub_category:
-    // Same logic for sub_category (e.g., 'Phones' or undefined if missing).
-    // Impact in Filter:
-    // The condition product.category?.name === category:
-    // If category is set (e.g., 'Electronics'):
-    // product.category?.name === 'Electronics':
-    // True if product.category.name = 'Electronics'.
-    // False if product.category?.name is undefined (i.e., undefined !== 'Electronics').
-    // If category = null, !category is true, so the condition passes anyway (no filter).
-    // Similarly for product.category?.sub_category === subcategory.
-    // Result:
-    // Products with missing category fail the filter when category or subcategory is set
-    //  (because undefined !== 'Electronics').
-    // No runtime errors occur, ensuring the app doesn’t crash.
+export const selectBestSellers = createSelector(
+  [selectBestSellersData],
+  (products) => [...products]
+);
 
-    if (sortingOption === "price_low_to_high") {
-      filtered = [...filtered].sort((a, b) => a.price - b.price);
-    } else if (sortingOption === "price_high_to_low") {
-      filtered = [...filtered].sort((a, b) => b.price - a.price);
-    }
-
-    return filtered;
-  }
+export const selectNewArrivals = createSelector(
+  [selectNewArrivalsData],
+  (products) => [...products]
 );
 
 export default productSlice.reducer;

@@ -17,11 +17,24 @@ const wishlistSlice = createSlice({
       state.items = state.items.filter((item) => item.id !== action.payload.id);
       localStorage.setItem("wishlist", JSON.stringify(state.items));
     },
+    toggleWishlist(state, action) {
+      const item = action.payload;
+      const isInWishlist = state.items.some(
+        (product) => product.id === item.id
+      );
+      if (isInWishlist) {
+        state.items = state.items.filter((product) => product.id !== item.id);
+      } else {
+        state.items.push(item);
+      }
+      localStorage.setItem("wishlist", JSON.stringify(state.items));
+    },
   },
 });
 
 export const selectWishlistItems = (state) => state.wishlist.items;
 
-export const { addToWishlist, removeFromWishlist } = wishlistSlice.actions;
+export const { addToWishlist, removeFromWishlist, toggleWishlist } =
+  wishlistSlice.actions;
 
 export default wishlistSlice.reducer;

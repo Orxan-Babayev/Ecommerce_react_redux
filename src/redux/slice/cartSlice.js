@@ -38,30 +38,14 @@ const cartSlice = createSlice({
   },
   reducers: {
     addItem: (state, action) => {
-      const newItem = { ...action.payload }; // Создание нового объекта с свойствами payload
-      // Установка quantity в 1, если оно не определено
-      if (!newItem.quantity || newItem.quantity < 1) {
-        newItem.quantity = 1;
-      }
-      // Проверка, существует ли товар уже в корзине
-      const existingItemIndex = state.items.findIndex(
-        (item) => item.id === newItem.id && item.size === newItem.size
-      );
-      if (existingItemIndex === -1) {
-        // Если товар не существует в корзине, добавляем его
-        state.items.push(newItem);
-        console.log("added to ");
-      } else {
-        // Если товар уже существует, вы можете обработать это по вашему усмотрению
-        console.log("Товар уже присутствует в корзине.");
-        // Например, вы можете обновить количество или показать сообщение пользователю
-        // Ничего не делаем, чтобы предотвратить добавление товара более одного раза
-      }
-      // Обновление промежуточной суммы, общей суммы и общего количества товаров
+      const newItem = {
+        ...action.payload,
+        quantity: action.payload.quantity || 1,
+      };
+      state.items.push(newItem); // Always add new item
       state.subtotal = calculateTotal(state.items);
       state.total = state.subtotal;
       state.itemCount = calculateTotalItems(state.items);
-      // Сохранение состояния в локальное хранилище
       saveStateToLocalStorage(state.items);
     },
     increaseQuantity: (state, action) => {

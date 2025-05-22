@@ -1,4 +1,3 @@
-// Product.tsx
 import React from "react";
 import styles from "./Product.module.css";
 import { Link } from "react-router-dom";

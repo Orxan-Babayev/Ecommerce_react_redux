@@ -1,48 +1,46 @@
-
 $background-color: #1f1f1f;
-$font-color: white;
+$font-color: #d7d7d7;
 $gap-large: 20px;
 $gap-small: 10px;
 
 @mixin flex-center {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
 
-.container{
-    background-color: $background-color;
+.container {
+  background-color: $background-color;
+  @include flex-center;
+  gap: $gap-large;
+  height: 93px;
+
+  .order {
     @include flex-center;
-    gap: $gap-large;
-    height: 93px;
+    width: calc(25% - 20px);
+    gap: $gap-small;
 
-    .order{
-       @include flex-center;
-        width: calc(25% - 20px);
-        gap: $gap-small;
-  
+    .title {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
 
-    .title{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-
-        span:nth-child(1){
-            font-size: 13px;
-            font-weight: 500;
-            color: $font-color;
-        }
-
-         span:nth-child(2){
-            font-size: 14px;
-            font-weight: 500;
-            color: $font-color;
-        }
-    }
-
-    .icon{
-        font-size: 30px;
-        color: $font-color ;
-    }
+      span:nth-child(1) {
+        font-size: 13px;
+        font-weight: 500;
+        color: $font-color;
       }
+
+      span:nth-child(2) {
+        font-size: 14px;
+        font-weight: 500;
+        color: $font-color;
+      }
+    }
+
+    .icon {
+      font-size: 40px;
+      color: $font-color;
+    }
+  }
 }

@@ -1,27 +1,3 @@
-// import { GlassMagnifier } from "react-image-magnifiers";
-
-// function ProductImage({ src, alt, enableMagnifier, img }) {
-//   console.log(img);
-//   return (
-//     <div className="product-image">
-//       {enableMagnifier ? (
-//         <GlassMagnifier
-//           imageSrc={src}
-//           imageAlt={alt}
-//           largeImageSrc={src}
-//           magnifierSize="30%"
-//           magnifierBorderSize={2}
-//           magnifierBackgroundColor="rgba(0,0,0, 0.5)"
-//         />
-//       ) : (
-//         <img src={src} alt={alt} />
-//       )}
-//     </div>
-//   );
-// }
-
-// export default ProductImage;
-
 import { GlassMagnifier } from "react-image-magnifiers";
 import { useState } from "react";
 

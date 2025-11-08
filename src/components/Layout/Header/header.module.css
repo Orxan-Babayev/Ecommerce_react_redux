@@ -1,55 +1,88 @@
-.head {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.head .top {
-  width: 100%;
-  height: 39px;
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: black;
+  background-color: #fff;
+  padding: 1.2rem 1.5rem;
+  max-width: 130rem;
+  margin: 0 auto;
 }
-.head .top span, .head .top .dropicon {
-  color: white;
-  font-size: 11px;
+
+.logo {
+  height: 3.2rem;
 }
-.head .top .modal {
+
+.navbar {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 5px;
+  gap: 4rem;
 }
-.head .nav {
-  width: 100%;
-  height: 70px;
+
+.navigate {
+  text-decoration: none;
+  display: inline-block;
+  color: #555;
+  font-size: 1.8;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.navigate:hover {
+  color: #24bb89;
+}
+
+.searchBar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 0.1rem;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  padding: 0.6rem 1.2rem;
+  background-color: #f7f7f7;
+  max-width: 32rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease-in;
 }
-.head .nav .logo img {
-  width: 80px;
-  height: 32px;
+
+.input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1.5rem;
+  color: #333;
+  font-family: inherit;
 }
-.head .nav .navbar {
-  width: 35%;
+
+.input::placeholder {
+  color: #aaa;
+}
+
+.icon {
+  font-size: 2rem;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+}
+
+.icon:hover {
+  color: #333;
+}
+
+.resetIcon {
+  font-size: 1.6rem;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+}
+
+.resetIcon:hover {
+  color: #333;
+  transform: rotate(90deg);
+}
+
+.user {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 20px;
-  font-size: 12px;
+  gap: 1.5rem;
 }
-.head .nav .navbar .navigate {
-  color: black;
-}
-.head .nav .icons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-}
-.head .nav .icons li {
-  font-size: 20px;
-  color: black;
-}/*# sourceMappingURL=header.module.css.map */

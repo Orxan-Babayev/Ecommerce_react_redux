@@ -2,10 +2,10 @@ function Sizes({ size, selectedSize, handleSizeChange }) {
   return (
     <li
       role="listitem"
-      className={selectedSize === size.name ? "selected" : ""}
-      onClick={() => handleSizeChange(size.name)}
+      className={selectedSize === size.size.name ? "selected" : ""}
+      onClick={() => handleSizeChange(size.size.name)}
     >
-      {size.name}
+      {size.size.name}
     </li>
   );
 }

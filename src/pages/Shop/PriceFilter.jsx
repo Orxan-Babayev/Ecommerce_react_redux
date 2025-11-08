@@ -1,10 +1,10 @@
-import { useCallback, useState, useEffect } from "react";
+import { useCallback, useState, useEffect, memo } from "react";
 import { useDispatch } from "react-redux";
 import { setPriceFilter } from "../../redux/slice/productSlice";
 import { debounce } from "lodash";
 import PriceInput from "./PriceInput";
 import ErrorMessage from "./ErrorMessage";
-import styles from "./Shop.module.scss";
+import styles from "./PriceFilter.module.css";
 
 const PriceFilter = ({ minPrice, maxPrice }) => {
   const dispatch = useDispatch();
@@ -67,29 +67,35 @@ const PriceFilter = ({ minPrice, maxPrice }) => {
   };
 
   return (
-    <div className={styles.priceFilter}>
-      <PriceInput
-        value={minPrice ?? ""}
-        onChange={(value) => handlePriceChange("minPrice", value)}
-        placeholder="Min Price"
-        min={0}
-        ariaLabel="Minimum price"
-        className={styles.priceInput}
-      />
-      <PriceInput
-        value={tempMaxPrice}
-        onChange={(value) => handlePriceChange("maxPrice", value)}
-        onBlur={(value) => handlePriceBlur("maxPrice", value)}
-        placeholder="Max Price"
-        min={Math.max(minPrice || 0, 0)}
-        ariaLabel="Maximum price"
-        className={`${styles.priceInput} ${
-          priceError ? styles.errorInput : ""
-        }`}
-      />
-      <ErrorMessage error={priceError} className={styles.errorMessage} />
+    <div>
+      <span className={styles.priceLabel}>Price</span>
+      <div className={styles.priceFilter}>
+        <PriceInput
+          value={minPrice ?? ""}
+          onChange={(value) => handlePriceChange("minPrice", value)}
+          placeholder="Min Price"
+          min={0}
+          ariaLabel="Minimum price"
+          className={styles.priceInput}
+        />
+        <span className={styles.dash}>-</span>
+        <PriceInput
+          value={tempMaxPrice}
+          onChange={(value) => handlePriceChange("maxPrice", value)}
+          onBlur={(value) => handlePriceBlur("maxPrice", value)}
+          placeholder="Max Price"
+          min={Math.max(minPrice || 0, 0)}
+          ariaLabel="Maximum price"
+          className={`${styles.priceInput} ${
+            priceError ? styles.errorInput : ""
+          }`}
+        />
+        <ErrorMessage error={priceError} className={styles.errorMessage} />
+      </div>
     </div>
   );
 };
 
-export default PriceFilter;
+const MemoizePriceFilter = memo(PriceFilter);
+
+export default MemoizePriceFilter;

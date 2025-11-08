@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 
 const loadStateFromLocalStorage = () => {
   try {
@@ -120,6 +120,14 @@ const saveStateToLocalStorage = (items) => {
     console.error("Ошибка сохранения состояния в localStorage:", err);
   }
 };
+
+// // Memoized selector for cart items
+// export const selectCartItems = createSelector(
+//   [(state) => state.cart.items],
+//   (items) => items
+// );
+
+export const selectCartItems = (state) => state.cart.items;
 
 export const {
   addItem,

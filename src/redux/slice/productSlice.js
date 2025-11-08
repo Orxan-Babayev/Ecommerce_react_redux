@@ -21,203 +21,129 @@ export const buildQuery = (filters) => {
     start: "_start",
     sort: "_sort",
     order: "_order",
+    count: "count",
   };
-
-  const sanitize = (value) => {
-    if (value === null || value === undefined) return "";
-    return encodeURIComponent(String(value));
-  };
-
   Object.entries(filters).forEach(([key, value]) => {
-    if (key in paramMap && value !== undefined && value !== null) {
+    if (key in paramMap && value != null) {
       const mappedKey = paramMap[key];
       if (Array.isArray(value)) {
-        value.forEach((val) => {
-          if (val !== null && val !== undefined && val !== "") {
-            params.append(mappedKey, sanitize(val));
-          }
-        });
+        value.forEach(
+          (val) => val && params.append(mappedKey, val)
+          //  (val) => val && params.append(mappedKey, encodeURIComponent(val))
+        );
       } else {
-        const sanitizedValue = sanitize(value);
-        if (sanitizedValue !== "") {
-          params.append(mappedKey, sanitizedValue);
-        }
+        params.append(mappedKey, value);
       }
     }
   });
-
-  const query = params.toString();
-  console.log(query);
-  return query ? `?${query}` : "";
+  return params.toString() ? `?${params.toString()}` : "";
 };
 
-export const validateFilters = ({ minPrice, maxPrice, color, brands }) => {
-  if (minPrice !== undefined && minPrice < 0) {
+export const validateFilters = ({ minPrice, maxPrice }) => {
+  if (minPrice != null && minPrice < 0)
     throw new Error("minPrice cannot be negative");
-  }
-  if (maxPrice !== undefined && maxPrice < minPrice) {
+  if (maxPrice != null && maxPrice < minPrice)
     throw new Error("maxPrice cannot be less than minPrice");
-  }
-  if (color && !Array.isArray(color)) {
-    throw new Error("colors must be an array");
-  }
-  if (brands && !Array.isArray(brands)) {
-    throw new Error("brands must be an array");
-  }
 };
 
 export const fetchData = createAsyncThunk(
   "product/fetchData",
-  async (
-    {
-      category,
-      subcategory,
-      minPrice,
-      maxPrice,
-      searchQuery,
-      color,
-      brands,
-      sortingOption,
-    } = {},
-    { rejectWithValue }
-  ) => {
+  async (args = {}, { rejectWithValue }) => {
     try {
-      validateFilters({ minPrice, maxPrice, color, brands });
-
-      // Base filters (excluding color and brands for multi-select)
-      const baseFilters = {
+      const {
         category,
         subcategory,
         minPrice,
         maxPrice,
         searchQuery,
+        color,
+        brands,
+        sortingOption,
+        start,
+        limit,
+        count,
+      } = args;
+
+      validateFilters({ minPrice, maxPrice });
+
+      const usedStart = Number.isFinite(start) ? start : 0;
+      const usedLimit = Number.isFinite(limit) ? limit : 12;
+
+      const sortOptions = {
+        price_low_to_high: { sort: "price", order: "asc" },
+        price_high_to_low: { sort: "price", order: "desc" },
+        title_asc: { sort: "title", order: "asc" },
+        title_desc: { sort: "title", order: "desc" },
       };
 
-      // Apply sorting
-      if (sortingOption === "price_low_to_high") {
-        baseFilters.sort = "price";
-        baseFilters.order = "asc";
-      } else if (sortingOption === "price_high_to_low") {
-        baseFilters.sort = "price";
-        baseFilters.order = "desc";
-      }
-
-      // Special case: both color and brands have multiple selections
-      if (
-        (Array.isArray(color) && color.length > 0) ||
-        (Array.isArray(brands) && brands.length > 0)
-      ) {
-        // We'll use a Set to avoid duplicate products
-        const productMap = new Map();
-
-        // If colors are selected, fetch products for each color
-        if (Array.isArray(color) && color.length > 0) {
-          for (const singleColor of color) {
-            const colorFilter = { ...baseFilters, color: singleColor };
-
-            // If brands are also selected, we need to handle combinations
-            if (Array.isArray(brands) && brands.length > 0) {
-              for (const singleBrand of brands) {
-                const combinedFilter = { ...colorFilter, brands: singleBrand };
-                const query = buildQuery(combinedFilter);
-
-                console.log(
-                  `Fetching color: ${singleColor}, brand: ${singleBrand} with query: ${query}`
-                );
-                const res = await axios.get(
-                  `http://localhost:8001/products${query}`
-                );
-
-                if (Array.isArray(res.data)) {
-                  // Add products to our map using ID as key to avoid duplicates
-                  res.data.forEach((product) => {
-                    productMap.set(product.id, product);
-                  });
-                }
-              }
-            } else {
-              // Only color is selected, no brands
-              const query = buildQuery(colorFilter);
-
-              console.log(
-                `Fetching color: ${singleColor} with query: ${query}`
-              );
-              const res = await axios.get(
-                `http://localhost:8001/products${query}`
-              );
-
-              if (Array.isArray(res.data)) {
-                res.data.forEach((product) => {
-                  productMap.set(product.id, product);
-                });
-              }
-            }
-          }
-        }
-        // If only brands are selected (no colors)
-        else if (Array.isArray(brands) && brands.length > 0) {
-          for (const singleBrand of brands) {
-            const brandFilter = { ...baseFilters, brands: singleBrand };
-            const query = buildQuery(brandFilter);
-
-            console.log(`Fetching brand: ${singleBrand} with query: ${query}`);
-            const res = await axios.get(
-              `http://localhost:8001/products${query}`
-            );
-
-            if (Array.isArray(res.data)) {
-              res.data.forEach((product) => {
-                productMap.set(product.id, product);
-              });
-            }
-          }
-        }
-
-        // Convert map values to array
-        const allProducts = [...productMap.values()];
-
-        // Apply sorting to combined results
-        if (sortingOption === "price_low_to_high") {
-          allProducts.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
-        } else if (sortingOption === "price_high_to_low") {
-          allProducts.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
-        }
-
-        return allProducts;
-      }
-
-      // For single filters or no filters, use the original approach
       const filters = {
         category,
         subcategory,
         minPrice,
         maxPrice,
         searchQuery,
-        color: Array.isArray(color) && color.length === 1 ? color[0] : color,
-        brands:
-          Array.isArray(brands) && brands.length === 1 ? brands[0] : brands,
+        color,
+        brands,
+        limit: usedLimit,
+        start: usedStart,
+        count,
+        ...(sortOptions[sortingOption] || { sort: "id", order: "asc" }),
       };
 
-      if (sortingOption === "price_low_to_high") {
-        filters.sort = "price";
-        filters.order = "asc";
-      } else if (sortingOption === "price_high_to_low") {
-        filters.sort = "price";
-        filters.order = "desc";
-      }
+      console.log("📦 Filters being sent:", filters);
 
       const query = buildQuery(filters);
-      console.log("Fetching with query:", query);
       const res = await axios.get(`http://localhost:8001/products${query}`);
-      console.log(res.data);
 
-      if (!Array.isArray(res.data)) {
-        throw new Error("Expected an array of products");
+      const data = res.data;
+
+      // 🧩 Auto-normalize: detect structure type
+      let products, total;
+      if (Array.isArray(data)) {
+        // normal mode: backend returned array
+        products = data;
+        total = null;
+      } else if (data.products && Array.isArray(data.products)) {
+        // count mode: backend returned object
+        products = data.products;
+        total = data.total ?? null;
+      } else {
+        throw new Error("Unexpected backend response format");
       }
 
-      return res.data;
+      console.log("✅ Normalized:", { products, total, usedStart, usedLimit });
+
+      return {
+        products,
+        total,
+        start: usedStart,
+        limit: usedLimit,
+      };
     } catch (error) {
-      console.error("Error fetching products:", error.message);
+      console.error("❌ fetchData error:", error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchNewArrivals = createAsyncThunk(
+  "product/fetchNewArrivals",
+  async ({ start = 0, batchSize = 8 } = {}, { rejectWithValue }) => {
+    try {
+      const query = buildQuery({
+        newArrived: true,
+        start,
+        limit: batchSize,
+        count: true,
+      });
+      const res = await axios.get(`http://localhost:8001/products${query}`);
+      if (!Array.isArray(res.data.products))
+        throw new Error("Expected an array of new arrival products");
+      const { products, total } = res.data;
+      const hasMore =
+        start + products.length < total && products.length === batchSize;
+      return { products, start, hasMore };
+    } catch (error) {
       return rejectWithValue(error.message);
     }
   }
@@ -228,50 +154,11 @@ export const fetchBestSellers = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const query = buildQuery({ bestsellers: true });
-      console.log(query);
       const res = await axios.get(`http://localhost:8001/products${query}`);
-
-      if (!Array.isArray(res.data)) {
+      if (!Array.isArray(res.data))
         throw new Error("Expected an array of bestseller products");
-      }
-
       return res.data;
     } catch (error) {
-      console.error("Error fetching bestsellers:", error.message);
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-export const fetchNewArrivals = createAsyncThunk(
-  "product/fetchNewArrivals",
-  async ({ start = 0, batchSize = 8 } = {}, { rejectWithValue }) => {
-    try {
-      // Fetch paginated new arrivals
-      const query = buildQuery({ newArrived: true, start, limit: batchSize });
-      const res = await axios.get(`http://localhost:8001/products${query}`);
-      if (!Array.isArray(res.data)) {
-        throw new Error("Expected an array of new arrival products");
-      }
-
-      // Fetch total count of new arrivals (without pagination)
-      const totalQuery = buildQuery({ newArrived: true });
-      const totalRes = await axios.get(
-        `http://localhost:8001/products${totalQuery}`
-      );
-      const totalItems = totalRes.data.length;
-      console.log(totalItems);
-
-      const hasMore =
-        start + res.data.length < totalItems && res.data.length === batchSize;
-      console.log(
-        start + res.data.length < totalItems && res.data.length === batchSize
-      );
-      console.log(start);
-
-      return { products: res.data, start, hasMore };
-    } catch (error) {
-      console.error("Error fetching new arrivals:", error.message);
       return rejectWithValue(error.message);
     }
   }
@@ -282,12 +169,10 @@ export const fetchTopCategories = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const res = await axios.get("http://localhost:8001/top-categories");
-      if (!Array.isArray(res.data)) {
+      if (!Array.isArray(res.data))
         throw new Error("Expected an array of top categories");
-      }
       return res.data;
     } catch (error) {
-      console.error("Error fetching top categories:", error.message);
       return rejectWithValue(error.message);
     }
   }
@@ -300,8 +185,7 @@ export const fetchCategories = createAsyncThunk(
       const res = await axios.get("http://localhost:8001/categories");
       return res.data;
     } catch (error) {
-      console.error("Error fetching categories:", error.message);
-      return rejectWithValue({ message: error.message });
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -311,11 +195,9 @@ export const fetchColors = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const res = await axios.get("http://localhost:8001/colors");
-      console.log(res.data);
       return res.data;
     } catch (error) {
-      console.error("Error fetching colors:", error.message);
-      return rejectWithValue({ message: error.message });
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -325,32 +207,63 @@ export const fetchBrands = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const res = await axios.get("http://localhost:8001/brands");
-      if (!Array.isArray(res.data)) {
+      if (!Array.isArray(res.data))
         throw new Error("Expected an array of brands");
-      }
-
       return res.data;
     } catch (error) {
-      console.error("Error fetching brands:", error.message);
       return rejectWithValue(error.message);
     }
   }
 );
 
-// Initial State
+export const fetchNews = createAsyncThunk(
+  "product/fetchNews",
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await axios.get("http://localhost:8001/news");
+      if (!Array.isArray(res.data))
+        throw new Error("Expected an array of news");
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 const initialState = {
   data: [],
   categories: [],
   colors: [],
   brands: [],
+  news: [],
   bestSellersData: [],
   newArrivalsData: [],
-  newArrivalsSkip: 0, // Track number of products fetched
-  newArrivalsHasMore: true, // Track if more products exist
-  topCategories: [], // New state for top-categories
-  loading: false,
-  error: null,
-
+  newArrivalsSkip: 0,
+  newArrivalsHasMore: true,
+  topCategories: [],
+  total: 0, // Added for total product
+  hasMore: true, // Added to track if more produtcs
+  start: 0,
+  loading: {
+    data: false,
+    categories: false,
+    colors: false,
+    brands: false,
+    news: false,
+    bestSellers: false,
+    newArrivals: false,
+    topCategories: false,
+  },
+  error: {
+    data: null,
+    categories: null,
+    colors: null,
+    brands: null,
+    news: null,
+    bestSellers: null,
+    newArrivals: null,
+    topCategories: null,
+  },
   filters: {
     searchQuery: "",
     minPrice: null,
@@ -363,39 +276,59 @@ const initialState = {
   },
 };
 
-// Slice Definition
 export const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
     setSearchQuery: (state, action) => {
       state.filters.searchQuery = action.payload;
+      state.data = []; //Reset when filter
+      state.total = 0;
+      state.hasMore = true;
+      state.start = 0;
     },
 
     setPriceFilter: (state, action) => {
-      state.filters.minPrice = isNaN(action.payload.minPrice)
-        ? 0
-        : action.payload.minPrice;
-      state.filters.maxPrice = isNaN(action.payload.maxPrice)
-        ? undefined
-        : action.payload.maxPrice;
+      const { minPrice, maxPrice } = action.payload || {};
+
+      state.filters.minPrice =
+        typeof minPrice === "number" && Number.isFinite(minPrice)
+          ? minPrice
+          : null;
+
+      state.filters.maxPrice =
+        typeof maxPrice === "number" && Number.isFinite(maxPrice)
+          ? maxPrice
+          : undefined;
+      state.data = []; //Reset when filter
+      state.total = 0;
+      state.hasMore = true;
     },
 
     setSortingOption: (state, action) => {
       state.filters.sortingOption = action.payload;
+      state.data = []; //Reset when filter
+      state.total = 0;
+      state.hasMore = true;
+      state.start = 0;
     },
-
     setCategory: (state, action) => {
       state.filters.selectedCategory = action.payload;
       state.filters.selectedSubcategory = "";
       state.filters.selectedColors = [];
       state.filters.selectedBrands = [];
+      state.data = []; //Reset when filter
+      state.total = 0;
+      state.hasMore = true;
+      state.start = 0;
     },
-
     setSubcategory: (state, action) => {
       state.filters.selectedSubcategory = action.payload;
+      state.data = []; //Reset when filter
+      state.total = 0;
+      state.hasMore = true;
+      state.start = 0;
     },
-
     toggleColor: (state, action) => {
       const color = action.payload;
       state.filters.selectedColors = state.filters.selectedColors.includes(
@@ -403,8 +336,25 @@ export const productSlice = createSlice({
       )
         ? state.filters.selectedColors.filter((c) => c !== color)
         : [...state.filters.selectedColors, color];
+      state.data = []; //Reset when filter
+      state.total = 0;
+      state.hasMore = true;
+      state.start = 0;
     },
-
+    setSelectedColors: (state, action) => {
+      state.filters.selectedColors = action.payload || [];
+      state.data = []; //Reset when filter
+      state.total = 0;
+      state.hasMore = true;
+      state.start = 0;
+    },
+    setSelectedBrands: (state, action) => {
+      state.filters.selectedBrands = action.payload || [];
+      state.data = []; //Reset when filter
+      state.total = 0;
+      state.hasMore = true;
+      state.start = 0;
+    },
     toggleBrand: (state, action) => {
       const brand = action.payload;
       state.filters.selectedBrands = state.filters.selectedBrands.includes(
@@ -412,47 +362,59 @@ export const productSlice = createSlice({
       )
         ? state.filters.selectedBrands.filter((b) => b !== brand)
         : [...state.filters.selectedBrands, brand];
+      state.data = []; //Reset when filter
+      state.total = 0;
+      state.hasMore = true;
+      state.start = 0;
     },
-
     resetFilters: (state) => {
       state.filters.searchQuery = "";
-      state.filters.minPrice = 0;
+      state.filters.minPrice = null;
       state.filters.maxPrice = undefined;
       state.filters.sortingOption = "";
       state.filters.selectedCategory = null;
       state.filters.selectedSubcategory = "";
       state.filters.selectedColors = [];
       state.filters.selectedBrands = [];
+      state.data = []; //Reset when filter
+      state.total = 0;
+      state.hasMore = true;
+      state.start = 0;
+    },
+    incrementStart: (state, action) => {
+      state.start += action.payload;
     },
   },
-
   extraReducers: (builder) => {
     builder
-      // fetchTopCategories
-
-      .addCase(fetchTopCategories.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+      .addCase(fetchData.pending, (state) => {
+        state.loading.data = true;
+        state.error.data = null;
       })
-      .addCase(fetchTopCategories.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.topCategories = payload;
+      .addCase(fetchData.fulfilled, (state, action) => {
+        state.loading.data = false;
+        const { products, total, start, limit } = action.payload;
+        console.log(action.payload);
+        console.log(products, "4"); // only overrite not
+        state.data = start === 0 ? products : [...state.data, ...products];
+        if (total !== null) {
+          state.total = total;
+          state.hasMore =
+            start + products.length < total && products.length === limit;
+        } else {
+          state.hasMore = products.length === limit;
+        }
       })
-      .addCase(fetchTopCategories.rejected, (state, { payload }) => {
-        state.loading = false;
-        state.error = payload;
+      .addCase(fetchData.rejected, (state, action) => {
+        state.loading.data = false;
+        state.error.data = action.payload;
       })
-
-      // fetchedNewArrials
-
       .addCase(fetchNewArrivals.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.loading.newArrivals = true;
+        state.error.newArrivals = null;
       })
-
       .addCase(fetchNewArrivals.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        // Reset newArrivalsData for initial fetch (start: 0), append otherwise
+        state.loading.newArrivals = false;
         state.newArrivalsData =
           payload.start === 0
             ? payload.products
@@ -461,92 +423,84 @@ export const productSlice = createSlice({
         state.newArrivalsHasMore = payload.hasMore;
       })
       .addCase(fetchNewArrivals.rejected, (state, { payload }) => {
-        state.loading = false;
-        state.error = payload;
+        state.loading.newArrivals = false;
+        state.error.newArrivals = payload;
       })
-
-      //  fetchedData
-
-      .addCase(fetchData.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-
-      .addCase(fetchData.fulfilled, (state, action) => {
-        state.loading = false;
-        state.error = null;
-        state.data = action.payload;
-      })
-
-      .addCase(fetchData.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
-
-      // fetchedbestSellers
-
       .addCase(fetchBestSellers.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.loading.bestSellers = true;
+        state.error.bestSellers = null;
       })
       .addCase(fetchBestSellers.fulfilled, (state, { payload }) => {
-        state.loading = false;
+        state.loading.bestSellers = false;
         state.bestSellersData = payload;
       })
       .addCase(fetchBestSellers.rejected, (state, { payload }) => {
-        state.loading = false;
-        state.error = payload;
+        state.loading.bestSellers = false;
+        state.error.bestSellers = payload;
       })
-
-      // fetched category
-
+      .addCase(fetchTopCategories.pending, (state) => {
+        state.loading.topCategories = true;
+        state.error.topCategories = null;
+      })
+      .addCase(fetchTopCategories.fulfilled, (state, { payload }) => {
+        state.loading.topCategories = false;
+        state.topCategories = payload;
+      })
+      .addCase(fetchTopCategories.rejected, (state, { payload }) => {
+        state.loading.topCategories = false;
+        state.error.topCategories = payload;
+      })
       .addCase(fetchCategories.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.loading.categories = true;
+        state.error.categories = null;
       })
-
       .addCase(fetchCategories.fulfilled, (state, action) => {
-        state.loading = false;
+        state.loading.categories = false;
         state.categories = action.payload;
       })
       .addCase(fetchCategories.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload.message;
+        state.loading.categories = false;
+        state.error.categories = action.payload.message;
       })
-
-      // fetcehedcolors
-
       .addCase(fetchColors.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.loading.colors = true;
+        state.error.colors = null;
       })
       .addCase(fetchColors.fulfilled, (state, action) => {
-        state.loading = false;
+        state.loading.colors = false;
         state.colors = action.payload;
       })
       .addCase(fetchColors.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload.message;
+        state.loading.colors = false;
+        state.error.colors = action.payload.message;
       })
-
-      //  fetchedbrands
-
       .addCase(fetchBrands.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.loading.brands = true;
+        state.error.brands = null;
       })
       .addCase(fetchBrands.fulfilled, (state, action) => {
-        state.loading = false;
+        state.loading.brands = false;
         state.brands = action.payload;
       })
       .addCase(fetchBrands.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload.message;
+        state.loading.brands = false;
+        state.error.brands = action.payload.message;
+      })
+      .addCase(fetchNews.pending, (state) => {
+        state.loading.news = true;
+        state.error.news = null;
+      })
+      .addCase(fetchNews.fulfilled, (state, { payload }) => {
+        state.loading.news = false;
+        state.news = payload;
+      })
+      .addCase(fetchNews.rejected, (state, { payload }) => {
+        state.loading.news = false;
+        state.error.news = payload;
       });
   },
 });
 
-// Actions
 export const {
   setSearchQuery,
   setPriceFilter,
@@ -555,43 +509,51 @@ export const {
   setSubcategory,
   toggleColor,
   toggleBrand,
+  setSelectedBrands,
+  setSelectedColors,
   resetFilters,
+  incrementStart,
 } = productSlice.actions;
 
 export const selectData = (state) => state.product.data;
-// data get fetched
+export const selectStart = (state) => state.product.start;
+export const selectDataLoading = (state) => state.product.loading.data;
+export const selectDataError = (state) => state.product.error.data;
 export const selectBestSellersData = (state) => state.product.bestSellersData;
-// best seller fetched
+export const selectBestSellersLoading = (state) =>
+  state.product.loading.bestSellers;
+export const selectBestSellersError = (state) =>
+  state.product.error.bestSellers;
 export const selectNewArrivalsData = (state) => state.product.newArrivalsData;
+export const selectNewArrivalsLoading = (state) =>
+  state.product.loading.newArrivals;
+export const selectNewArrivalsError = (state) =>
+  state.product.error.newArrivals;
 export const selectNewArrivalsSkip = (state) => state.product.newArrivalsSkip;
 export const selectNewArrivalsHasMore = (state) =>
   state.product.newArrivalsHasMore;
-//  new Arrival and load
 export const selectCategories = (state) => state.product.categories;
-
-// all fetched cat
+export const selectCategoriesLoading = (state) =>
+  state.product.loading.categories;
+export const selectCategoriesError = (state) => state.product.error.categories;
+export const selectNews = (state) => state.product.news;
+export const selectNewsLoading = (state) => state.product.loading.news;
+export const selectNewsError = (state) => state.product.error.news;
 export const selectColors = (state) => state.product.colors;
-// fetched color
 export const selectBrands = (state) => state.product.brands;
-// fetched brand
+export const selectBrandsLoading = (state) => state.product.loading.brands;
+export const selectBrandsError = (state) => state.product.error.brands;
 export const selectTopCategories = (state) => state.product.topCategories;
-// fetched top
+export const selectTopCategoriesLoading = (state) =>
+  state.product.loading.topCategories;
+export const selectTopCategoriesError = (state) =>
+  state.product.error.topCategories;
 export const selectFilters = (state) => state.product.filters;
-
 export const selectSearchQuery = (state) => state.product.filters.searchQuery;
-
+export const selectTotal = (state) => state.product.total;
+export const selectHasMore = (state) => state.product.hasMore;
 export const selectFilteredProducts = createSelector(
   [selectData],
-  (products) => [...products]
-);
-
-export const selectBestSellers = createSelector(
-  [selectBestSellersData],
-  (products) => [...products]
-);
-
-export const selectNewArrivals = createSelector(
-  [selectNewArrivalsData],
   (products) => [...products]
 );
 

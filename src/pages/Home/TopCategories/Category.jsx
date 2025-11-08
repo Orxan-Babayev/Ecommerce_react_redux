@@ -1,24 +1,26 @@
-import React from "react";
 import { Link } from "react-router-dom";
+import styles from "./Category.module.css";
 
 const Category = ({ category, onClick }) => {
   return (
-    <div>
-      <Link
-        to="/shop"
+    <div className={styles.topCategories}>
+      <div
+        role="link"
+        className={styles.link}
         onClick={() => onClick(category.name)}
         aria-label={`Shop ${category.name}`}
       >
-        <div>
+        <div className={styles.img_box}>
           <img
+            className={styles.img}
             src={category.image}
-            alt={`Shop ${category.name}`}
+            alt={`Image of ${category.name} category`}
             loading="lazy"
             onError={(e) => (e.target.src = "/fallback-image.jpg")}
           />
         </div>
-      </Link>
-      <p>{category.name}</p>
+        <p className={styles.categoryName}>{category.name}</p>
+      </div>
     </div>
   );
 };

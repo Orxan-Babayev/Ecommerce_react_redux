@@ -1,0 +1,13 @@
+.dropdownSelect {
+  border: 1px solid #eee;
+  background-color: #fff;
+  color: #000;
+  border-radius: 0.6rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.dropdownSelect:focus {
+  /* border-color: #000; */
+  outline: none;
+}

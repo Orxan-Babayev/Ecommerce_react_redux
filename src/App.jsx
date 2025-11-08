@@ -5,7 +5,8 @@ import Shop from "./pages/Shop/Shop";
 import ProductSingle from "./pages/Product/ProductSingle";
 import Cart from "./pages/Cart/Cart";
 import NotFound from "./pages/NotFound/NotFound";
-import "./style/style.scss";
+import "./global.css";
+import Wishlist from "./pages/Wishlist";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/product/:id" element={<ProductSingle />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/wishlist" element={<Wishlist />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

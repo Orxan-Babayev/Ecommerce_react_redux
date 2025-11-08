@@ -1,23 +1,27 @@
-
-
-.brand{
-    padding: 0 0 30px ;
-    display: flex;
-    justify-content: center;
- 
-
-    .background{
-        width: 154px;
-        height:75px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid #eee;
-   
-
-
-.brandimg{
- width: 100%;
+.brandBox {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 1rem;
+  padding: 0 2.8rem;
+  height: 6rem;
+  width: 100%;
+  // text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18rem;
+  font-size: 1.6rem;
+  color: #111;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
- }
+
+.brandBox:hover {
+  background: #111;
+  color: #fff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  // transform: translateY(-3px);
 }

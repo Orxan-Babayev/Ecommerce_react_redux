@@ -1,127 +1,114 @@
-
-.container{
-  width: 90%;
+.section {
+  position: absolute;
+  top: 25%;
+  z-index: 2;
 }
-.section{
-  display: flex;
-  justify-content: center;
+
+.first {
+  right: 12%;
+}
+
+.second {
+  left: 7%;
 }
 
 .swiper {
-  width: 100%;
+  max-width: 130rem;
   height: 100vh;
+  position: relative;
+  --swiper-navigation-size: "25px";
 }
 
-.slide1{
- background-image: url(../../../assets/slide-01.jpg);
- background-position: center;
- background-repeat: no-repeat;
- background-size: cover;
+.slide1 {
+  width: 600px;
 }
 
-.slide2{
-  background-image: url(../../../assets/slide2.jpg);
+.slide2 {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
- }
- 
- .main{
-  font-size: 36px;
-  margin-top: 151px;
-  margin-bottom: 15px;
-  font-weight: 600;
-  color: #333333;
-  line-height: 36px;
-  margin-bottom: 10px;
-  animation-name: word;
-  animation-duration: 1s;
-  animation-delay: 0.5s;
-  animation-fill-mode: forwards;
-  opacity: 0;
- }
-
- @keyframes  word{
-  from {
-      transform:translateY(-170px);
-      opacity:0;
-  }
-  to{
-      transform:translateY(0);
-      opacity:1;
-  }
 }
 
-.as{
-color: #333333;
-font-weight: 400;
+.primary {
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  color: #111;
+  line-height: 1.2;
+  font-size: 7.4rem; /* Set final font size */
 }
 
-.button{
- margin-top: 33px;
- width: 180px;
- height: 50px;
-  line-height: 22px;
-  color: #333;
-  border: 2px solid #333;
-  background: none;
+.secondary {
+  color: #111;
+  font-size: 1.4rem;
+  line-height: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.description {
+  color: #111;
+  font-size: 2rem;
+  line-height: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 3.5rem;
+}
+
+.button {
+  padding: 1.6rem 4rem;
+  display: inline-block;
+  line-height: 1rem;
+  color: #fff;
+  background-color: #333;
   text-transform: uppercase;
-  border-radius: 2px;
+  border-radius: 6px;
+  border: 1px solid #111;
+  text-align: center;
+  outline: none;
+  font-size: 1.5rem; /* Set final font size */
+  transition: background-color 0.3s ease; /* Smooth hover transition */
+}
+
+.button:hover {
+  background-color: #3b935d;
+}
+
+.margin_right {
+  margin-right: 1.5rem;
+}
+
+:global(.swiper-button-next),
+:global(.swiper-button-prev) {
+  color: #111;
+  font-weight: 400;
+  background-color: white;
+  border-radius: 50%;
+  width: 6rem;
+  height: 6rem;
+  font-size: 1.2rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 15px;
-  text-align: center;
-  cursor: pointer;
-  outline: none;
-  animation-name: word1;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
-  animation-delay: 0.2s;
-  opacity: 0;
-}
-
-@keyframes  word1{
-from {
-    transform:translateY(-250px);
-    opacity:0;
-}
-to{
-    transform:translateY(0);
-    opacity:1;
-}
-}
-
-.swiper-button-prev {
-  color: #333;
-  font-weight: 400;
-  background-color: white;
-  border-radius: 100%;
-  width: 40px;
-  height: 40px; 
-  font-size: 16px;
+  position: absolute;
+  top: 42%;
+  transform: translateY(-42%);
   box-shadow: 0px 3px 6px 1px rgba(0, 0, 0, 0.1);
-  
-  
-  &:hover{
-  background-color: #bd8448;
-  }
-  
+  z-index: 10;
+  transition: background-color 0.3s ease;
 }
 
-.swiper-button-next {
-// color: #333; 
-// font-weight: 400;
-// background-color: white;
-// border-radius: 100%;
-// width: 40px;
-// height: 40px; 
-// font-size: 16px;
-// box-shadow: 0px 3px 6px 1px rgba(0, 0, 0, 0.1);
-
-
-&:hover{
-background-color: #bd8448;
+:global(.swiper-button-prev) {
+  left: 25px;
 }
 
+:global(.swiper-button-next) {
+  right: 20px;
+}
+
+:global(.swiper-button-next:hover),
+:global(.swiper-button-prev:hover) {
+  background-color: #bd8448 !important; /* Ensure hover applies */
+}
+
+:global(.swiper-slide) {
+  transition: opacity 0.5s; /* Smooth fade transition */
 }

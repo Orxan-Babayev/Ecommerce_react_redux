@@ -1,0 +1,45 @@
+.descriptionTab {
+  padding: 3rem 0 0;
+}
+
+.descriptionTab p {
+  color: #333;
+  font-size: 1.4rem;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+}
+
+.descriptionTab h4 {
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: 1.6;
+  word-wrap: break-word;
+  color: #111;
+  margin-bottom: 0.75rem;
+}
+
+.data {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.descriptionTab ul {
+  margin: 1rem 0 3rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.4rem;
+  color: #333;
+  font-size: 1.4rem;
+  line-height: 1.6;
+}
+
+.descriptionTab ul li {
+  list-style: disc;
+  list-style-position: outside;
+}
+
+.descriptionTab ul li::marker {
+  font-size: 1.5rem;
+  color: #333;
+}

@@ -1,13 +1,13 @@
 .colorSwatch {
   display: inline-block;
-  width: 32px;
-  height: 24px;
+  width: 3rem;
+  height: 2.2rem;
 
   border: 1px solid #ccc;
 }
 
 /* ✅ Add border only if checkbox is checked */
 input[type="checkbox"]:checked + .colorSwatch {
-  outline: 2px solid #333;
-  outline-offset: 2px;
+  outline: 1px solid #333;
+  outline-offset: 1px;
 }

@@ -1,14 +1,15 @@
 import React from "react";
+import styles from "./Features.module.css";
 
 const Feature = ({ feature }) => {
   return (
-    <div>
-      {feature.icon}
-      <div>
-        <span>{feature.title}</span>
-        <span>{feature.subtitle}</span>
+    <li className={styles.item}>
+      <div className={styles.icon}> {feature.icon}</div>
+      <div className={styles.text}>
+        <span className={styles.title}>{feature.title}</span>
+        <span className={styles.subtitle}>{feature.subtitle}</span>
       </div>
-    </div>
+    </li>
   );
 };
 

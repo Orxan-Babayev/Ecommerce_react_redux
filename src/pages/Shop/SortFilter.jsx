@@ -1,17 +1,26 @@
 import { useDispatch } from "react-redux";
 import { setSortingOption } from "../../redux/slice/productSlice";
-import Select from "./Select";
+import DropdownSelect from "./DropdownSelect";
+import { memo } from "react";
 
 const SortFilter = ({ sortingOption }) => {
   const dispatch = useDispatch();
 
   const sortOptions = [
-    { id: "price_low_to_high", name: "Price: Low to High" },
-    { id: "price_high_to_low", name: "Price: High to Low" },
+    {
+      id: "price_low_to_high",
+      name: "price_low_to_high",
+      value: "Price: Low to High",
+    },
+    {
+      id: "price_high_to_low",
+      name: "price_high_to_low",
+      value: "Price: High to Low",
+    },
   ];
 
   return (
-    <Select
+    <DropdownSelect
       value={sortingOption}
       onChange={(value) => dispatch(setSortingOption(value))}
       options={sortOptions}
@@ -22,4 +31,6 @@ const SortFilter = ({ sortingOption }) => {
   );
 };
 
-export default SortFilter;
+const MemoizeSortFilter = memo(SortFilter);
+
+export default MemoizeSortFilter;

@@ -1,0 +1,79 @@
+.actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.quantity {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.addBtn {
+  font-size: 1.3rem;
+  font-weight: 500;
+  padding: 1.5rem 2.5rem;
+  line-height: 1.6;
+  color: #fff;
+  background-color: #333;
+  border-radius: 0.6rem;
+  border: 1px solid #fff;
+  text-transform: uppercase;
+  width: 100%;
+  outline: none;
+  cursor: pointer;
+  border: 1px solid #fff;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 1.5rem;
+}
+
+.addBtn:hover {
+  background-color: #40b884;
+}
+
+.icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.icons svg {
+  display: block;
+  width: 5rem;
+  height: 3rem;
+}
+
+.wishlist {
+  border: none;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  font-size: 1.3rem;
+  color: #333;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+}
+
+.wishlist:hover {
+  color: #777;
+}
+
+.calendar {
+  color: #333;
+  font-size: 1.3rem;
+  line-height: 1.6;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.calendarIcons {
+  font-size: 2rem;
+}

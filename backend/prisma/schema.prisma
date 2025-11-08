@@ -1,0 +1,119 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL") // Reads DB path from .env
+}
+
+
+model Color {
+  id       Int       @id @default(autoincrement())
+  color    String    @unique
+  products Product[]
+}
+
+model Brand {
+  id       Int       @id @default(autoincrement())
+  brand    String    @unique
+  products Product[]
+}
+
+model Category {
+  id            Int           @id @default(autoincrement())
+  name          String        @unique
+  subCategories SubCategory[]
+  products      Product[]
+}
+
+model SubCategory {
+  id         Int       @id @default(autoincrement())
+  name       String    @unique
+  categoryId Int
+  category   Category  @relation(fields: [categoryId], references: [id])
+  products   Product[]
+}
+
+model TopCategory {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  image String
+}
+
+model Swiper {
+  id          Int            @id @default(autoincrement())
+  title       String
+  description String
+  image       String
+  buttons     SwiperButton[]
+}
+
+model SwiperButton {
+  id       Int    @id @default(autoincrement())
+  text     String
+  swiperId Int
+  swiper   Swiper @relation(fields: [swiperId], references: [id])
+}
+
+model News {
+  id    Int    @id @default(autoincrement())
+  title String
+  image String
+  alt   String
+}
+
+model Product {
+  id              Int          @id @default(autoincrement())
+  title           String
+  price           Float
+  description     String
+  product_code    String?
+  image           String
+  newArrived      Boolean      @default(false)
+  recommended     Boolean      @default(false)
+  bestsellers     Boolean      @default(false)
+  stockAvailabilty Boolean     @default(true)
+  stockCount      Int          @default(0)
+  saleAvailabilty Boolean      @default(false)
+  saleCount       Int?
+
+  categoryId      Int
+  category        Category     @relation(fields: [categoryId], references: [id])
+  subCategoryId   Int
+  subCategory     SubCategory  @relation(fields: [subCategoryId], references: [id])
+  brandId         Int
+  brand           Brand        @relation(fields: [brandId], references: [id])
+  colorId         Int
+  color           Color        @relation(fields: [colorId], references: [id])
+  sizes           ProductSize[]
+  smallImages     ProductImage[]
+}
+
+model ProductImage {
+  id        Int     @id @default(autoincrement())
+  image     String
+  productId Int
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model Size {
+  id       Int          @id @default(autoincrement())
+  name     String       @unique
+  products ProductSize[]
+}
+
+model ProductSize {
+  id        Int     @id @default(autoincrement())
+  productId Int
+  sizeId    Int
+  product   Product @relation(fields: [productId], references: [id])
+  size      Size    @relation(fields: [sizeId], references: [id])
+}

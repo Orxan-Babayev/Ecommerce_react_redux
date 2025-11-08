@@ -14,31 +14,37 @@ const Checkbox = ({
   const dispatch = useDispatch();
 
   return (
-    <div className={styles.checkboxGroup} aria-labelledby={`${label}-label`}>
+    <div aria-labelledby={`${label}-label`}>
       <span id={`${label}-label`} className={styles.checkboxLabel}>
         {label}
       </span>
-      {items.length > 0 ? (
-        items.map((item) => (
-          <label
-            key={item.id}
-            className={`${styles.checkboxItem} ${
-              selectedItems.includes(item[itemKey]) ? styles.selected : ""
-            }`}
-          >
-            <input
-              type="checkbox"
-              checked={selectedItems.includes(item[itemKey])}
-              onChange={() => dispatch(toggleAction(item[itemKey]))}
-              aria-label={`${ariaLabelPrefix} ${item[itemKey]}`}
-              className={hideCheckbox ? styles.hiddenCheckbox : ""}
-            />
-            {children ? children(item) : item[itemKey]}
-          </label>
-        ))
-      ) : (
-        <p className={styles.noOptions}>No {label.toLowerCase()} available</p>
-      )}
+      <div
+        className={` ${
+          label === "Brands" ? styles.brands : styles.checkboxGroup
+        }`}
+      >
+        {items.length > 0 ? (
+          items.map((item) => (
+            <label
+              key={item.id}
+              className={`${styles.checkboxItem} ${
+                selectedItems.includes(item[itemKey]) ? styles.selected : ""
+              }  `}
+            >
+              <input
+                type="checkbox"
+                checked={selectedItems.includes(item[itemKey])}
+                onChange={() => dispatch(toggleAction(item[itemKey]))}
+                aria-label={`${ariaLabelPrefix} ${item[itemKey]}`}
+                className={hideCheckbox ? styles.hiddenCheckbox : ""}
+              />
+              {children ? children(item) : <span>{item[itemKey]}</span>}
+            </label>
+          ))
+        ) : (
+          <p className={styles.noOptions}>No {label.toLowerCase()} available</p>
+        )}
+      </div>
     </div>
   );
 };

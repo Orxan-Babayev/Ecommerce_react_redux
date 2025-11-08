@@ -1,18 +1,30 @@
-import ProductImage from "./ProductImage";
+import SizeSelector from "./SizeSelector";
+import styles from "./ProductDetails.module.css";
 
-function ProductDetails({ product, enableMagnifier }) {
+function ProductDetails({ product, selectedSize, handleSizeChange }) {
+  console.log(product);
   return (
     <div className="product-details">
-      <ProductImage
-        src={product.image}
-        alt={product.title}
-        img={product.smallImages}
-        enableMagnifier={enableMagnifier}
-      />
-      <h2>{product.title}</h2>
-      <p>{product.description}</p>
-      <p>Category: {product.category_name}</p>
-      <p>{product.InStock.stockCount}</p>
+      <h1 className={styles.title}>{product.title}</h1>
+      <span className={styles.price}>${product.price}</span>
+      {/* <p>{product.description}</p> */}
+      <span className={styles.category}>
+        Category: {product.category?.name?.toUpperCase()}
+      </span>
+      <span className={styles.size}>
+        Size:{selectedSize ? selectedSize : null}
+      </span>
+      <p className={styles.stock}>
+        In stock: {product.stockCount} - Ready to ship
+      </p>
+
+      {product.sizes?.length > 0 && (
+        <SizeSelector
+          sizes={product.sizes}
+          selectedSize={selectedSize}
+          handleSizeChange={handleSizeChange}
+        />
+      )}
     </div>
   );
 }

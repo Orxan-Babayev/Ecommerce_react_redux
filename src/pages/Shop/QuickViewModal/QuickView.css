@@ -14,8 +14,9 @@
 .quick-view-modal-content {
   background-color: #fff; /* White background for the modal */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Drop shadow effect */
-  height: 600px;
-  width: 950px; /* Set a width to prevent overflow on smaller screens */
+  height: 60rem;
+  width: 95rem; /* Set a width to prevent overflow on smaller screens */
+  padding: 1rem;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -25,11 +26,17 @@
 
 .quick-view-close {
   position: absolute;
-  padding: 0 10px;
+  padding: 0 2rem;
   top: 0;
   right: 0;
   cursor: pointer;
-  font-size: 40px;
+  font-size: 4rem;
   background-color: black;
   color: white;
+}
+
+.quickview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
 }

@@ -1,0 +1,111 @@
+.products {
+  display: grid;
+
+  column-gap: 1.7rem;
+  row-gap: 3rem;
+}
+
+.viewButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.9rem;
+}
+
+.viewButtons button {
+  background-color: transparent;
+  border: none;
+  padding: 0.5rem 0;
+  cursor: pointer;
+  font-size: 1.8rem;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+.viewButtons .active {
+  opacity: 1;
+}
+
+/* ====================== SKELETON PRODUCT ====================== */
+.skeletonProduct {
+  display: flex;
+  flex-direction: column;
+}
+
+.skeletonLinkImg {
+  position: relative;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  background: #f8f8f8;
+}
+
+.skeletonImage {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e5e5e5 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.8s infinite;
+}
+
+.skeletonImgIconPlaceholder {
+  position: absolute;
+  bottom: 17%;
+  left: 19%;
+  display: flex;
+  gap: 0.5rem;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.skeletonImgIconPlaceholder::before,
+.skeletonImgIconPlaceholder::after {
+  content: "";
+  width: 3.5rem;
+  height: 3.5rem;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.skeletonText {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.skeletonTitle {
+  height: 1.4rem;
+  width: 78%;
+  margin: 0 auto 1rem;
+  background: #e0e0e0;
+  border-radius: 6px;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+.skeletonPrice {
+  height: 1.5rem;
+  width: 52%;
+  margin: 0 auto;
+  background: #d0d0d0;
+  border-radius: 6px;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+/* ANIMATIONS */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}

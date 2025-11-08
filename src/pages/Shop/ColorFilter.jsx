@@ -1,6 +1,7 @@
 import Checkbox from "./Checkbox";
 import { toggleColor } from "../../redux/slice/productSlice";
 import styles from "./ColorFilter.module.css";
+import { memo } from "react";
 
 const ColorFilter = ({ colors, selectedColors }) => (
   <Checkbox
@@ -11,6 +12,7 @@ const ColorFilter = ({ colors, selectedColors }) => (
     itemKey="color"
     ariaLabelPrefix="Filter by"
     hideCheckbox // Hide checkbox for swatch-only display
+    variant="button"
   >
     {(item) => (
       <span
@@ -22,4 +24,6 @@ const ColorFilter = ({ colors, selectedColors }) => (
   </Checkbox>
 );
 
-export default ColorFilter;
+const MemoizeColorFilter = memo(ColorFilter);
+
+export default MemoizeColorFilter;

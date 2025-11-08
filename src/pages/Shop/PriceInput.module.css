@@ -1,0 +1,20 @@
+.priceInputWrapper {
+  display: flex;
+  align-items: center;
+
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.priceInputWrapper:focus-within {
+  border-color: #222;
+}
+
+.currency {
+  color: #555;
+  font-size: 1.4rem;
+  margin-right: 0.4rem;
+}

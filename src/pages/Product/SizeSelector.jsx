@@ -1,21 +1,19 @@
-import Sizes from "./Sizes";
+import styles from "./SizeSelector.module.css";
 
 function SizeSelector({ sizes, selectedSize, handleSizeChange }) {
-  if (!sizes) return null;
-
   return (
-    <div>
-      <p>Sizes:</p>
-      <ul>
-        {sizes.map((size) => (
-          <Sizes
-            size={size}
-            key={size.id}
-            selectedSize={selectedSize}
-            handleSizeChange={handleSizeChange}
-          />
-        ))}
-      </ul>
+    <div className={styles.sizeSelector}>
+      {sizes.map((size) => (
+        <button
+          key={size.id}
+          onClick={() => handleSizeChange(size.size.name)}
+          className={`${styles.sizeBtn} ${
+            selectedSize === size.size.name ? styles.active : ""
+          }`}
+        >
+          {size.size.name}
+        </button>
+      ))}
     </div>
   );
 }

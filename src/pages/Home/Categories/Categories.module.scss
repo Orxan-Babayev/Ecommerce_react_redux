@@ -1,47 +1,68 @@
-
-.container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 50px 40px;
-
-
-.sectitle{
-    display: flex;
-    justify-content: center;
-    padding-bottom: 35px;
-
-.subtitle{
-    font-size: 26px;
-    color: #111;
-    font-weight: 500;
-    margin: 0;
-    line-height: 1.3;
+.sectitle {
+  text-align: center;
+  padding-bottom: 3.5rem;
 }
 
+.subtitle {
+  font-size: 2.6rem;
+  color: #111;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.3;
 }
 
-.items{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-
-    .item{
-    width: calc(35% - 15px) ;
-
-    .catitem{
-        width: 420px;
-        height: 510px;
-    }
-
-    .product{
-        width: 408px;
-        height: 260px;
-    }
+.items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 24rem); /* 2 rows, each 24rem tall */
+  gap: 1.5rem;
 }
 
-}
+.item {
+  grid-row: span 2; /* Big image spans both rows */
 }
 
+.catitem,
+.product {
+  width: 100%;
+  height: 100%; /* Fill the grid cell */
+  object-fit: cover;
+  transition: all 0.3s ease-in-out;
+}
+
+.item:hover img,
+.splitItem:hover img,
+.item .button:hover ~ img,
+.splitItem .button:hover ~ img {
+  transform: scale(1.1);
+}
+
+.splitItem,
+.item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  overflow: hidden;
+  border-radius: 0.8rem;
+}
+
+.button {
+  position: absolute;
+  bottom: 3.5rem;
+  color: #111;
+  font-size: 1.2rem;
+  font-weight: 500;
+  border-radius: 0.6rem;
+  text-transform: uppercase;
+  background-color: #fff;
+  border: none;
+  outline: none;
+  padding: 1.4rem 2.8rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.button:hover {
+  color: #fff;
+  background-color: #333;
+}

@@ -1,11 +1,22 @@
 import React from "react";
+import styles from "./QuantityControl.module.css";
 
-function QuantityControl({ quantity, onQuantityControl }) {
+function QuantityControl({ quantity, onQuantityChange }) {
   return (
-    <div>
-      <button onClick={() => onQuantityControl(quantity - 1)}>-</button>
-      <span>{quantity}</span>
-      <button onClick={() => onQuantityControl(quantity + 1)}>+</button>
+    <div className={styles.quantityBtn}>
+      <button
+        className={` ${styles.btn} ${styles.right}`}
+        onClick={() => onQuantityChange(quantity - 1)}
+      >
+        -
+      </button>
+      <div className={styles.quantity}>{quantity}</div>
+      <button
+        className={` ${styles.btn} ${styles.left}`}
+        onClick={() => onQuantityChange(quantity + 1)}
+      >
+        +
+      </button>
     </div>
   );
 }

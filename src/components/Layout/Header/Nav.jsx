@@ -3,50 +3,34 @@ import styles from "./header.module.css";
 import { useDispatch } from "react-redux";
 import { resetFilters } from "../../../redux/slice/productSlice";
 
-function Nav() {
+function Nav({ className }) {
   const dispatch = useDispatch();
 
+  const nav = [
+    { to: "/", title: "HOME" },
+    { to: "/shop", title: "SHOP" },
+    { to: "/", title: "PRODUCTS" },
+    { to: "/", title: "FEATURES" },
+    { to: "/", title: "DEAL ZONE" },
+    { to: "/", title: "BLOG" },
+  ];
+
   return (
-    <div className={styles.head}>
-      <nav className={styles.nav}>
-        <ul className={styles.navbar}>
-          <li>
-            <Link to={"/"} className={styles.navigate}>
-              HOME
-            </Link>
-          </li>
-          <li>
-            <Link
-              to={"/shop"}
-              onClick={() => dispatch(resetFilters())}
-              className={styles.navigate}
-            >
-              SHOP
-            </Link>
-          </li>
-          <li>
-            <Link to={"/"} className={styles.navigate}>
-              PRODUCTS
-            </Link>
-          </li>
-          <li>
-            <Link to={"/"} className={styles.navigate}>
-              FEATURES
-            </Link>
-          </li>
-          <li>
-            <Link to={"/"} className={styles.navigate}>
-              DEAL ZONE
-            </Link>
-          </li>
-          <li>
-            <Link to={"/"} className={styles.navigate}>
-              BLOG
-            </Link>
-          </li>
-        </ul>
-      </nav>
-    </div>
+    <ul className={`${styles.navbar} ${className || ""}`}>
+      {nav.map((nav, index) => (
+        <li key={index}>
+          <Link
+            to={nav.to}
+            onClick={
+              nav.to === "/shop" ? () => dispatch(resetFilters()) : undefined
+            }
+            className={styles.navigate}
+          >
+            {nav.title}
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
 }
 

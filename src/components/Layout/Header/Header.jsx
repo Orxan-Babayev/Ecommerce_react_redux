@@ -14,6 +14,8 @@ import SearchBar from "./SearchBar";
 import HeaderIcons from "./HeaderIcons";
 import Logo from "./Logo";
 import WishlistModal from "./Wishlist/WishlistModal";
+import { GiHamburgerMenu } from "react-icons/gi";
+import NavModal from "./NavModal";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -25,6 +27,17 @@ const Header = () => {
 
   const [showWishlistModal, setShowWishlistModal] = useState(false);
   const [query, setQuery] = useState(searchQuery);
+
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    function handleResize() {
+      setIsMobile(window.innerWidth < 768);
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleSearch = useCallback(() => {
     if (!query.trim()) return;
@@ -53,9 +66,20 @@ const Header = () => {
   return (
     <>
       <header className={styles.header}>
+        {isMobile && (
+          <>
+            <GiHamburgerMenu onClick={() => setIsModalOpen(true)} />
+            {isModalOpen && <NavModal onClose={() => setIsModalOpen(false)} />}
+          </>
+        )}
         <Logo />
-        <Nav />
-
+        {!isMobile && (
+          <div className={styles.head}>
+            <nav className={styles.nav}>
+              <Nav />
+            </nav>
+          </div>
+        )}
         <SearchBar
           query={query}
           setQuery={setQuery}
@@ -66,7 +90,6 @@ const Header = () => {
           wishlistCount={totalWishlistQuantity}
           onWishlistClick={handleWishlistClick}
         />
-
         <WishlistModal
           showModal={showWishlistModal}
           handleCloseModal={() => setShowWishlistModal(false)}

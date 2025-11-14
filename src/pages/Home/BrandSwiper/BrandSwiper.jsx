@@ -26,20 +26,6 @@ const BrandSwiper = memo(() => {
 
   console.log(brands);
 
-  // const handleBrandClick = useCallback(
-  //   (brand) => {
-  //     dispatch(toggleBrand(brand));
-  //     console.log(brand);
-
-  //     const params = new URLSearchParams();
-  //     if (brand) params.set("brands", brand);
-  //     console.log(params);
-
-  //     navigate(`/shop?${params.toString()}`);
-  //   },
-  //   [dispatch, navigate]
-  // );
-
   const handleBrandClick = (brand) => {
     goToShop({ brand });
   };
@@ -53,12 +39,18 @@ const BrandSwiper = memo(() => {
       data={brands}
     >
       {brands.length > 0 && (
-        <div className="container">
+        <div className="container ">
           <Swiper
-            // {...swiperConfig}
+            {...swiperConfig}
             spaceBetween={25}
-            slidesPerView={7}
-            loop={brands.length >= 7}
+            breakpoints={{
+              ...swiperConfig.breakpoints,
+              1024: { slidesPerView: 7 },
+              768: { slidesPerView: 5 },
+              576: { slidesPerView: 3 },
+              0: { slidesPerView: 3 },
+            }}
+            loop={brands.length >= 6}
             pagination={{
               clickable: true,
             }}

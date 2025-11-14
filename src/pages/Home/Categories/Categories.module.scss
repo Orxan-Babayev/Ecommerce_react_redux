@@ -18,6 +18,22 @@
   gap: 1.5rem;
 }
 
+@media (max-width: 1024px) {
+  .items {
+    grid-template-rows: repeat(2, 18em);
+  }
+}
+
+@media (max-width: 767px) {
+  .items {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+  .item {
+    grid-row: span 1;
+  }
+}
+
 .item {
   grid-row: span 2; /* Big image spans both rows */
 }

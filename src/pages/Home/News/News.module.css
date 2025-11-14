@@ -6,11 +6,10 @@
   cursor: pointer;
 }
 
-/* .blog {
-  height: 20rem; /* or whatever fits your design */
-/* overflow: hidden;
-  border-radius: 1rem;
-} */
+.blog {
+  width: 100%;
+}
+
 .blogTitle {
   color: #000;
   font-size: 1.8rem;

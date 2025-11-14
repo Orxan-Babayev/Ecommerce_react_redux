@@ -11,7 +11,7 @@ import {
 import SectionWrapper from "../SectionWrapper";
 import Product from "../../Shop/Product";
 import Button from "../../Product/Button";
-import styles from "./NewArrivals.module.scss";
+import styles from "./NewArrivals.module.css";
 
 const NewArrivals = memo(() => {
   const dispatch = useDispatch();

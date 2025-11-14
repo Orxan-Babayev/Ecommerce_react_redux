@@ -28,12 +28,12 @@ const Header = () => {
   const [showWishlistModal, setShowWishlistModal] = useState(false);
   const [query, setQuery] = useState(searchQuery);
 
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     function handleResize() {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 1024);
     }
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -66,13 +66,17 @@ const Header = () => {
   return (
     <>
       <header className={styles.header}>
-        {isMobile && (
-          <>
-            <GiHamburgerMenu onClick={() => setIsModalOpen(true)} />
-            {isModalOpen && <NavModal onClose={() => setIsModalOpen(false)} />}
-          </>
-        )}
-        <Logo />
+        <div>
+          {isMobile && (
+            <>
+              <GiHamburgerMenu onClick={() => setIsModalOpen(true)} />
+              {isModalOpen && (
+                <NavModal onClose={() => setIsModalOpen(false)} />
+              )}
+            </>
+          )}
+          <Logo />
+        </div>
         {!isMobile && (
           <div className={styles.head}>
             <nav className={styles.nav}>

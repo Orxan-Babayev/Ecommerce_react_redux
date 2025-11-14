@@ -27,12 +27,12 @@ const Shop = () => {
   const categories = useSelector(selectCategories);
   const colors = useSelector(selectColors);
   const brands = useSelector(selectBrands);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
   useEffect(() => {
     function handleResize() {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 1024);
     }
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -49,30 +49,31 @@ const Shop = () => {
       <Breadcrumbs />
       <div className="container">
         <div className={`${styles.shopGrid} `}>
-          <div className={styles.filters}>
-            {!isMobile && (
-              <>
-                <CategoryFilter
-                  categories={categories}
-                  selectedCategory={filters.selectedCategory}
-                  selectedSubcategory={filters.selectedSubcategory}
-                />
-                <ColorFilter
-                  colors={colors}
-                  selectedColors={filters.selectedColors}
-                />
-                <BrandFilter
-                  brands={brands}
-                  selectedBrands={filters.selectedBrands}
-                />{" "}
-                <PriceFilter
-                  minPrice={filters.minPrice}
-                  maxPrice={filters.maxPrice}
-                />
-                <SortFilter sortingOption={filters.sortingOption} />
-                <ResetButton />{" "}
-              </>
-            )}
+          {!isMobile && (
+            <div className={styles.filters}>
+              <CategoryFilter
+                categories={categories}
+                selectedCategory={filters.selectedCategory}
+                selectedSubcategory={filters.selectedSubcategory}
+              />
+              <ColorFilter
+                colors={colors}
+                selectedColors={filters.selectedColors}
+              />
+              <BrandFilter
+                brands={brands}
+                selectedBrands={filters.selectedBrands}
+              />{" "}
+              <PriceFilter
+                minPrice={filters.minPrice}
+                maxPrice={filters.maxPrice}
+              />
+              <SortFilter sortingOption={filters.sortingOption} />
+              <ResetButton />{" "}
+            </div>
+          )}
+
+          <div>
             {isMobile && (
               <>
                 <button onClick={() => setIsFilterModalOpen(true)}>
@@ -105,15 +106,15 @@ const Shop = () => {
                 )}
               </>
             )}
+            <ProductList
+              products={products}
+              loading={loading}
+              error={error}
+              onRetry={fetchProducts}
+              hasMore={hasMore}
+              loadMore={loadMore}
+            />
           </div>
-          <ProductList
-            products={products}
-            loading={loading}
-            error={error}
-            onRetry={fetchProducts}
-            hasMore={hasMore}
-            loadMore={loadMore}
-          />
         </div>
       </div>
     </div>

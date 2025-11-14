@@ -9,6 +9,14 @@
   column-gap: 5.8rem;
 }
 
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 6rem;
+    row-gap: 5rem;
+  }
+}
+
 .logoCol {
   display: flex;
   flex-direction: column;

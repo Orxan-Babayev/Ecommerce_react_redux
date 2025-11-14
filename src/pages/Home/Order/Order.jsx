@@ -19,21 +19,21 @@ const Order = memo(() => {
     },
     {
       id: 2,
-      icon: <BiMessageDetail size={30} color="#fff" />,
-      title: "24/7 HELP CENTER",
-      subtitle: "Dedicated 24/7 support",
-    },
-    {
-      id: 3,
       icon: <HiOutlineReceiptRefund size={30} color="#fff" />,
       title: "SATISFIED OR REFUNDED",
       subtitle: "Free returns within 14 days",
     },
     {
-      id: 4,
+      id: 3,
       icon: <BsShieldCheck size={30} color="#fff" />,
       title: "100% SECURE PAYMENTS",
       subtitle: "Accept all payment methods",
+    },
+    {
+      id: 4,
+      icon: <BiMessageDetail size={30} color="#fff" />,
+      title: "24/7 HELP CENTER",
+      subtitle: "Dedicated 24/7 support",
     },
   ];
   return (

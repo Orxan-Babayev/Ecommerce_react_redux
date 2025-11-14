@@ -201,10 +201,9 @@ const ProductList = ({
 
       {/* Product Grid */}
       <div
-        className={styles.products}
-        style={{
-          gridTemplateColumns: `repeat(${gridColumns}, 1fr)`,
-        }}
+        className={`${styles.products} ${
+          gridColumns === 4 ? styles.grid4 : styles.grid3
+        }`}
       >
         {/* Real Products */}
         {products.map((product) => (

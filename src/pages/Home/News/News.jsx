@@ -35,9 +35,15 @@ const News = memo(() => {
         {newsData.length > 0 && (
           <div className="container padding-bottom-sm">
             <Swiper
-              // {...swiperConfig}
-              slidesPerView={3}
-              spaceBetween={30}
+              {...swiperConfig}
+              breakpoints={{
+                ...swiperConfig.breakpoints,
+                1024: { slidesPerView: 3 },
+                768: { slidesPerView: 2 },
+                576: { slidesPerView: 1 },
+                0: { slidesPerVIew: 1 },
+              }}
+              spaceBetween={10}
               loop={newsData.length >= 3}
             >
               {newsData.map((news) => (
